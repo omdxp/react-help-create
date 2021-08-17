@@ -1,0 +1,20 @@
+{
+  "name": "react-help-create",
+  "version": "1.0.0",
+  "description": "This command line helps you create components, pages and even redux implementation for your react project.",
+  "main": "bin/index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [
+    "react",
+    "react-help-create",
+    "rhc"
+  ],
+  "author": {
+    "email": "omarbelghaouti@gmail.com",
+    "name": "Omar Belghaouti",
+    "url": "https://omarbelghaouti.space/"
+  },
+  "license": "MIT"
+}
