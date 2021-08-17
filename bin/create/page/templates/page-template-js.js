@@ -5,6 +5,6 @@
  * @returns {string} the page template in javascript.
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-export const pageTemplateJs = (pageName) => `
+exports.pageTemplateJs = (pageName) => `
 ${pageName}
 `;

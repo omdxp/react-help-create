@@ -8,6 +8,6 @@
  * @version 1.0.0
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-export const createComponent = (componentName, js, ts, folder) => {
+exports.createComponent = (componentName, js, ts, folder) => {
   console.log(`Creating component ${componentName} ${js} ${ts} ${folder}`);
 };

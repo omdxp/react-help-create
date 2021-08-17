@@ -8,6 +8,6 @@
  * @version 1.0.0
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-export const createPage = (pageName, js, ts, folder) => {
+exports.createPage = (pageName, js, ts, folder) => {
   console.log(`Creating page: ${pageName} ${js} ${ts} ${folder}`);
 };

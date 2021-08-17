@@ -8,6 +8,6 @@
  * @version 1.0.0
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-export const createRedux = (reduxName, js, ts, folder) => {
+exports.createRedux = (reduxName, js, ts, folder) => {
   console.log(`Creating redux ${reduxName} ${js} ${ts} ${folder}`);
 };

@@ -1,11 +1,21 @@
-export { createComponent } from "./component/functions";
-export {
+const { createComponent } = require("./component/functions");
+const {
   componentTemplateJs,
   componentTemplateTs,
-} from "./component/templates";
+} = require("./component/templates");
 
-export { createPage } from "./page/functions";
-export { pageTemplateJs, pageTemplateTs } from "./page/templates";
+const { createPage } = require("./page/functions");
+const { pageTemplateJs, pageTemplateTs } = require("./page/templates");
 
-export { createRedux } from "./redux/functions";
-export { reduxTemplateJs, reduxTemplateTs } from "./redux/templates";
+const { createRedux } = require("./redux/functions");
+const { reduxTemplateJs, reduxTemplateTs } = require("./redux/templates");
+
+exports.createComponent = createComponent;
+exports.componentTemplateJs = componentTemplateJs;
+exports.componentTemplateTs = componentTemplateTs;
+exports.createPage = createPage;
+exports.pageTemplateJs = pageTemplateJs;
+exports.pageTemplateTs = pageTemplateTs;
+exports.createRedux = createRedux;
+exports.reduxTemplateJs = reduxTemplateJs;
+exports.reduxTemplateTs = reduxTemplateTs;

@@ -1,1 +1,3 @@
-export { createRedux } from "./create-redux";
+const { createRedux } = require("./create-redux");
+
+exports.createRedux = createRedux;

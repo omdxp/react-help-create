@@ -1,1 +1,3 @@
-export { createPage } from "./create-page";
+const { createPage } = require("./create-page");
+
+exports.createPage = createPage;

@@ -1,9 +1,7 @@
 #!usr/bin/env node
 
 const yargs = require("yargs");
-const fs = require("file-system");
-
-import { createComponent, createPage, createRedux } from "./create";
+const { createComponent, createPage, createRedux } = require("./create");
 
 yargs
   .scriptName("rhc")

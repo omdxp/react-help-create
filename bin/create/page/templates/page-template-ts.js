@@ -5,6 +5,6 @@
  * @returns {string} the page template in typescript.
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-export const pageTemplateTs = (pageName) => `
+exports.pageTemplateTs = (pageName) => `
 ${pageName}
 `;

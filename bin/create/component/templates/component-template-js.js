@@ -6,6 +6,6 @@
  * @version 1.0.0
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-export const componentTemplateJs = (componentName) => `
+exports.componentTemplateJs = (componentName) => `
 ${componentName}
 `;

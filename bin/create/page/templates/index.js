@@ -1,2 +1,5 @@
-export { pageTemplateJs } from "./page-template-js";
-export { pageTemplateTs } from "./page-template-ts";
+const { pageTemplateJs } = require("./page-template-js");
+const { pageTemplateTs } = require("./page-template-ts");
+
+exports.pageTemplateJs = pageTemplateJs;
+exports.pageTemplateTs = pageTemplateTs;
