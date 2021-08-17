@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "This command line helps you create components, pages and even redux implementation for your react project.",
   "main": "bin/index.js",
+  "bin": {
+    "rhc": "bin/index.js"
+  },
   "scripts": {
     "start": "node ."
   },
