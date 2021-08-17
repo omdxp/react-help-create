@@ -14,7 +14,7 @@ yargs
         .positional("-c", {
           alias: "--component",
           type: "string",
-          describe: "to create react components",
+          describe: "to create components",
         })
         .array("-c")
         .positional("-p", {
@@ -48,12 +48,12 @@ yargs
       const { component, page, redux, js, ts, folder } = argv;
       if (component) {
         createComponent(component, js, ts, folder);
-      }
-      if (page) {
+      } else if (page) {
         createPage(page, js, ts, folder);
-      }
-      if (redux) {
+      } else if (redux) {
         createRedux(redux, js, ts, folder);
+      } else {
+        console.log("Check usage: rhc create --help");
       }
     }
   )
