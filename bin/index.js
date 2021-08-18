@@ -1,6 +1,7 @@
 #!usr/bin/env node
 
 const yargs = require("yargs");
+const { fs } = require("file-system");
 const { createComponent, createPage, createRedux } = require("./create");
 const { deleteComponents, deletePages, deleteRedux } = require("./delete");
 const { combineComponents, combinePages } = require("./combine");
@@ -47,15 +48,19 @@ yargs
         });
     },
     (argv) => {
-      const { component, page, redux, js, ts, folder } = argv;
-      if (component) {
-        component.forEach((c) => createComponent(c, js, ts, folder));
-      } else if (page) {
-        page.forEach((p) => createPage(p, js, ts, folder));
-      } else if (redux) {
-        createRedux(redux, js, ts);
+      if (fs.existsSync("package.json")) {
+        const { component, page, redux, js, ts, folder } = argv;
+        if (component) {
+          component.forEach((c) => createComponent(c, js, ts, folder));
+        } else if (page) {
+          page.forEach((p) => createPage(p, js, ts, folder));
+        } else if (redux) {
+          createRedux(redux, js, ts);
+        } else {
+          console.log("Check usage: rhc create --help");
+        }
       } else {
-        console.log("Check usage: rhc create --help");
+        console.log("You don't seem to be at the root of a react project");
       }
     }
   )
@@ -89,15 +94,19 @@ yargs
         });
     },
     (argv) => {
-      const { component, page, redux, folder } = argv;
-      if (component) {
-        deleteComponents(component, folder);
-      } else if (page) {
-        deletePages(page, folder);
-      } else if (redux) {
-        deleteRedux(redux);
+      if (fs.existsSync("package.json")) {
+        const { component, page, redux, folder } = argv;
+        if (component) {
+          deleteComponents(component, folder);
+        } else if (page) {
+          deletePages(page, folder);
+        } else if (redux) {
+          deleteRedux(redux);
+        } else {
+          console.log("Check usage: rhc delete --help");
+        }
       } else {
-        console.log("Check usage: rhc delete --help");
+        console.log("You don't seem to be at the root of a react project");
       }
     }
   )
@@ -128,13 +137,17 @@ yargs
         });
     },
     (argv) => {
-      const { components, pages, folder } = argv;
-      if (components) {
-        combineComponents(components, folder);
-      } else if (pages) {
-        combinePages(pages, folder);
+      if (fs.existsSync("package.json")) {
+        const { components, pages, folder } = argv;
+        if (components) {
+          combineComponents(components, folder);
+        } else if (pages) {
+          combinePages(pages, folder);
+        } else {
+          console.log("Check usage: rhc combine --help");
+        }
       } else {
-        console.log("Check usage: rhc combine --help");
+        console.log("You don't seem to be at the root of a react project");
       }
     }
   )
