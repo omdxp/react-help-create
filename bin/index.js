@@ -49,7 +49,7 @@ yargs
       if (component) {
         component.forEach((c) => createComponent(c, js, ts, folder));
       } else if (page) {
-        createPage(page, js, ts, folder);
+        page.forEach((p) => createPage(p, js, ts, folder));
       } else if (redux) {
         createRedux(redux, js, ts, folder);
       } else {
