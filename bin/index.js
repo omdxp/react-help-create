@@ -3,6 +3,7 @@
 const yargs = require("yargs");
 const { createComponent, createPage, createRedux } = require("./create");
 const { deleteComponents, deletePages, deleteRedux } = require("./delete");
+const { combineComponents, combinePages } = require("./combine");
 
 yargs
   .scriptName("rhc")
@@ -97,6 +98,43 @@ yargs
         deleteRedux(redux);
       } else {
         console.log("Check usage: rhc delete --help");
+      }
+    }
+  )
+  .command(
+    "combine [name]",
+    "combine components or pages in a specific folder",
+    (yargs) => {
+      yargs
+        .positional("-c", {
+          alias: "--components",
+          type: "string",
+          array: true,
+          describe: "components to be combined in a folder",
+        })
+        .array("-c")
+        .positional("-p", {
+          alias: "--pages",
+          type: "string",
+          array: true,
+          describe: "pages to be combined in a folder",
+        })
+        .array("-p")
+        .option("f", {
+          alias: "folder",
+          type: "string",
+          describe: "name or path of folder that combines components or pages",
+          demandOption: "this option is mandatory" | true,
+        });
+    },
+    (argv) => {
+      const { components, pages, folder } = argv;
+      if (components) {
+        combineComponents(components, folder);
+      } else if (pages) {
+        combinePages(pages, folder);
+      } else {
+        console.log("Check usage: rhc combine --help");
       }
     }
   )
