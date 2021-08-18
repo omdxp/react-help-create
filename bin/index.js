@@ -51,7 +51,7 @@ yargs
       } else if (page) {
         page.forEach((p) => createPage(p, js, ts, folder));
       } else if (redux) {
-        createRedux(redux, js, ts, folder);
+        createRedux(redux, js, ts);
       } else {
         console.log("Check usage: rhc create --help");
       }
