@@ -2,6 +2,7 @@
 
 const yargs = require("yargs");
 const { createComponent, createPage, createRedux } = require("./create");
+const { deleteComponents, deletePages, deleteRedux } = require("./delete");
 
 yargs
   .scriptName("rhc")
@@ -54,6 +55,48 @@ yargs
         createRedux(redux, js, ts);
       } else {
         console.log("Check usage: rhc create --help");
+      }
+    }
+  )
+  .command(
+    "delete [name]",
+    "delete components, pages and redux implementation",
+    (yargs) => {
+      yargs
+        .positional("-c", {
+          alias: "--component",
+          type: "string",
+          describe: "to delete components",
+        })
+        .array("-c")
+        .positional("-p", {
+          alias: "--page",
+          type: "string",
+          describe: "to delete pages",
+        })
+        .array("-p")
+        .positional("-r", {
+          alias: "--redux",
+          type: "string",
+          describe: "to delete redux implementation",
+        })
+        .option("f", {
+          alias: "folder",
+          type: "string",
+          default: "",
+          describe: "to delete files in a specific folder",
+        });
+    },
+    (argv) => {
+      const { component, page, redux, folder } = argv;
+      if (component) {
+        deleteComponents(component, folder);
+      } else if (page) {
+        deletePages(page, folder);
+      } else if (redux) {
+        deleteRedux(redux);
+      } else {
+        console.log("Check usage: rhc delete --help");
       }
     }
   )
