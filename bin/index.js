@@ -47,7 +47,7 @@ yargs
     (argv) => {
       const { component, page, redux, js, ts, folder } = argv;
       if (component) {
-        createComponent(component, js, ts, folder);
+        component.forEach((c) => createComponent(c, js, ts, folder));
       } else if (page) {
         createPage(page, js, ts, folder);
       } else if (redux) {

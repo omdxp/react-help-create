@@ -6,6 +6,18 @@
  * @version 1.0.0
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-exports.componentTemplateTs = (componentName) => `
-${componentName}
+exports.componentTemplateTs = (componentName) => {
+  let component = componentName;
+  component[0] = component[0].toUpperCase();
+  return `import { FC } from "react";
+
+// define ${component} props interface
+interface ${component}Props {}
+
+// export ${component} component
+const ${component}: FC<${component}Props> = ({}: ${component}Props): JSX.Element => {
+    return <div>${component} component created!</div>;
+}
+export default ${component};
 `;
+};

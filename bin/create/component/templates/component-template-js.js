@@ -6,6 +6,13 @@
  * @version 1.0.0
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-exports.componentTemplateJs = (componentName) => `
-${componentName}
+exports.componentTemplateJs = (componentName) => {
+  let component = componentName;
+  component[0] = component[0].toUpperCase();
+  return `// export ${component} component
+const ${component} = () => {
+    return <div>${component} component created!</div>;
+}
+export default ${component};
 `;
+};
