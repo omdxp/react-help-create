@@ -1,3 +1,5 @@
+const { fs } = require("file-system");
+
 /**
  * @function deleteRedux
  * @description this function is used to delete redux implementation that exists.
@@ -6,5 +8,11 @@
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.deleteRedux = (reduxName) => {
-  // TODO: implement this
+  const path = `src/${reduxName.toLowerCase()}/`;
+  try {
+    fs.rmdirSync(path);
+    console.log(`${path} deleted`);
+  } catch (err) {
+    console.log(`${path} does not exist`);
+  }
 };
