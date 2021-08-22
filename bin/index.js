@@ -1,7 +1,7 @@
-#!usr/bin/env node
+#!/usr/bin/env node
 
 const yargs = require("yargs");
-const { fs } = require("file-system");
+const fs = require("file-system");
 const { createComponent, createPage, createRedux } = require("./create");
 const { deleteComponents, deletePages, deleteRedux } = require("./delete");
 const { combineComponents, combinePages } = require("./combine");

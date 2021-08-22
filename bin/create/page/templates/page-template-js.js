@@ -5,6 +5,12 @@
  * @returns {string} the page template in javascript.
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-exports.pageTemplateJs = (pageName) => `
-${pageName}
+exports.pageTemplateJs = (pageName) => {
+  let page = pageName.charAt(0).toUpperCase() + pageName.slice(1);
+  return `// export ${page} page
+const ${page} = () => {
+    return <div>${page} page created!</div>;
+}
+export default ${page};
 `;
+};

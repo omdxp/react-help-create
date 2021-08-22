@@ -1,4 +1,4 @@
-const { fs } = require("file-system");
+const fs = require("file-system");
 const { componentTemplateJs, componentTemplateTs } = require("../templates");
 
 /**
@@ -22,6 +22,7 @@ exports.createComponent = (componentName, js, ts, folder) => {
     } else {
       fs.writeFile(path, componentTemplateTs(componentName), (err) => {
         if (err) {
+          console.log(err);
           console.log(`Unable to create ${componentName} component`);
         } else {
           console.log(`${path} created`);

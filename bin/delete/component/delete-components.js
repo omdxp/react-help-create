@@ -1,4 +1,4 @@
-const { fs } = require("file-system");
+const fs = require("file-system");
 
 /**
  * @function deleteComponents
@@ -10,7 +10,7 @@ const { fs } = require("file-system");
  */
 exports.deleteComponents = (components, folder) => {
   if (components.length === 0 && folder !== "") {
-    const path = `src/components/${folder}`;
+    const path = `src/components/${folder}/`;
     try {
       fs.rmdirSync(path);
       console.log(`${path} deleted`);
@@ -20,7 +20,8 @@ exports.deleteComponents = (components, folder) => {
     return;
   }
   components.forEach((component) => {
-    const path = folder !== "" ? `src/components/` : `src/components/${folder}`;
+    const path =
+      folder === "" ? `src/components/` : `src/components/${folder}/`;
     if (fs.existsSync(`${path}${component.toLowerCase()}.tsx`)) {
       fs.unlink(`${path}${component.toLowerCase()}.tsx`, (err) => {
         if (err) {

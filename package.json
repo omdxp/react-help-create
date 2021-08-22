@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "file-system": "^1.2.2",
+    "file-system": "^2.2.2",
     "yargs": "^17.1.1"
   }
 }

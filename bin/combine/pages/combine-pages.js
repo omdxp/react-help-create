@@ -1,4 +1,4 @@
-const { fs } = require("file-system");
+const fs = require("file-system");
 
 /**
  * @function combinePages

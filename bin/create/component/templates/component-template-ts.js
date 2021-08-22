@@ -7,8 +7,8 @@
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.componentTemplateTs = (componentName) => {
-  let component = componentName;
-  component[0] = component[0].toUpperCase();
+  let component =
+    componentName.charAt(0).toUpperCase() + componentName.slice(1);
   return `import { FC } from "react";
 
 // define ${component} props interface
