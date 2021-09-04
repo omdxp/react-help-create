@@ -10,6 +10,11 @@
     "rhc": "node .",
     "rhc:help": "node . --help"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Omar-Belghaouti/react-help-create.git"
+  },
+  "homepage": "https://github.com/Omar-Belghaouti/react-help-create/",
   "keywords": [
     "react",
     "react-help-create",

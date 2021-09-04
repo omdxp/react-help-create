@@ -55,9 +55,11 @@ yargs
     },
     (argv) => {
       if (fs.existsSync("package.json")) {
-        const { component, page, redux, js, ts, folder } = argv;
+        const { component, page, redux, js, ts, folder, template } = argv;
         if (component) {
-          component.forEach((c) => createComponent(c, js, ts, folder));
+          component.forEach((c) =>
+            createComponent(c, js, ts, folder, template)
+          );
         } else if (page) {
           page.forEach((p) => createPage(p, js, ts, folder));
         } else if (redux) {
