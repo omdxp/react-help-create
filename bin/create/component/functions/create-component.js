@@ -25,7 +25,7 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
       if (template !== "") {
         const temp = fs
           .readdirSync(".template")
-          .filter((file) => file.startsWith(template))[0];
+          .filter((file) => file.split(".")[0] === template)[0];
         if (temp) {
           const file = fs.readFileSync(`.template/${temp}`, {
             encoding: "utf8",
@@ -65,7 +65,7 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
       if (template !== "") {
         const temp = fs
           .readdirSync(".template")
-          .filter((file) => file.startsWith(template))[0];
+          .filter((file) => file.split(".")[0] === template)[0];
         if (temp) {
           const file = fs.readFileSync(`.template/${temp}`, {
             encoding: "utf8",
