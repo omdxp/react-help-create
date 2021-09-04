@@ -45,6 +45,12 @@ yargs
           type: "string",
           default: "",
           describe: "to create files in a specific folder",
+        })
+        .option("t", {
+          alias: "template",
+          type: "string",
+          default: "",
+          describe: "to create files with user defined templates",
         });
     },
     (argv) => {
