@@ -23,8 +23,11 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
     } else {
       // check if template file exist
       if (template !== "") {
-        if (fs.existsSync(`.template/${template}.js`)) {
-          const file = fs.readFileSync(`.template/${template}.js`, {
+        const temp = fs
+          .readdirSync(".template")
+          .filter((file) => file.startsWith(template))[0];
+        if (temp) {
+          const file = fs.readFileSync(`.template/${temp}`, {
             encoding: "utf8",
             flag: "r",
           });
@@ -37,7 +40,7 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
             }
           });
         } else {
-          console.log(`.template/${template}.js does not exist`);
+          console.log(`.template/${template} file does not exist`);
         }
       } else {
         fs.writeFile(path, componentTemplateTs(componentName), (err) => {
@@ -60,8 +63,11 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
     } else {
       // check if template file exist
       if (template !== "") {
-        if (fs.existsSync(`.template/${template}.js`)) {
-          const file = fs.readFileSync(`.template/${template}.js`, {
+        const temp = fs
+          .readdirSync(".template")
+          .filter((file) => file.startsWith(template))[0];
+        if (temp) {
+          const file = fs.readFileSync(`.template/${temp}`, {
             encoding: "utf8",
             flag: "r",
           });
@@ -74,7 +80,7 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
             }
           });
         } else {
-          console.log(`.template/${template}.js does not exist`);
+          console.log(`.template/${template} file does not exist`);
         }
       } else {
         fs.writeFile(path, componentTemplateJs(componentName), (err) => {
