@@ -61,7 +61,7 @@ yargs
             createComponent(c, js, ts, folder, template)
           );
         } else if (page) {
-          page.forEach((p) => createPage(p, js, ts, folder));
+          page.forEach((p) => createPage(p, js, ts, folder, template));
         } else if (redux) {
           createRedux(redux, js, ts);
         } else {

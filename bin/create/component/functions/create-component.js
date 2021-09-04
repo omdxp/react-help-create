@@ -9,7 +9,7 @@ const { componentTemplateJs, componentTemplateTs } = require("../templates");
  * @param {boolean} ts - if the component is a typescript component.
  * @param {string} folder - the folder of the component.
  * @param {string} template - the template to create the component.
- * @version 1.0.0
+ * @version 1.1.0
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.createComponent = (componentName, js, ts, folder, template) => {
