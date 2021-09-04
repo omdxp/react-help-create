@@ -45,15 +45,23 @@ yargs
           type: "string",
           default: "",
           describe: "to create files in a specific folder",
+        })
+        .option("t", {
+          alias: "template",
+          type: "string",
+          default: "",
+          describe: "to create files with user defined templates",
         });
     },
     (argv) => {
       if (fs.existsSync("package.json")) {
-        const { component, page, redux, js, ts, folder } = argv;
+        const { component, page, redux, js, ts, folder, template } = argv;
         if (component) {
-          component.forEach((c) => createComponent(c, js, ts, folder));
+          component.forEach((c) =>
+            createComponent(c, js, ts, folder, template)
+          );
         } else if (page) {
-          page.forEach((p) => createPage(p, js, ts, folder));
+          page.forEach((p) => createPage(p, js, ts, folder, template));
         } else if (redux) {
           createRedux(redux, js, ts);
         } else {

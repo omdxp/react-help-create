@@ -6,8 +6,9 @@
 2. [Creating files](#creating-files)
 
 - 1. [Creating components](#creating-components)
-- 2. [Creating pages](#creating-pages)
-- 3. [Creating redux implementation](#creating-redux-implementation)
+- 3. [Creating pages](#creating-pages)
+- 4. [Creating components and pages with templates](#creating-components-and-pages-with-templates)
+- 5. [Creating redux implementation](#creating-redux-implementation)
 
 3. [Deleting files](#deleting-files)
 
@@ -27,7 +28,7 @@
 - You can run `rhc --help` to see the available commands.
 - By default `rhc` helps you create components, pages and redux implementation in JavaScript (so `--js` is optional).
 - If you want to create components or pages in TypeScript, all what you need to do is to add the option `--ts` at the end of your command line.
-- You don't have to specify the language option in `delete` nor in `combine` mode.
+- You don't have to specify the language nor template option in `delete` nor in `combine` mode.
 
 ## Creating files
 
@@ -72,6 +73,58 @@ rhc create -p <page_name_1> <page_name_2> ...
 ```sh
 rhc create -p <page_name_1> <page_name_2> ... -f <folder>
 ```
+
+### Creating components and pages with templates
+
+- Sometimes you want to create components with templates that you create, well you can do it in `rhc` by following these steps:
+
+1 - First thing to do is to create a `.template` folder at the root of your react project.
+
+2 - Inside the `.template` folder you can add your template, for example `componentWithUseEffect.tsx` (the file extension doesn't matter so it could be `*.jsx`, `*.js` or `*.tsx`):
+
+```tsx
+import { useEffect } from "react";
+
+export default function Component() {
+  useEffect(() => {}, []);
+
+  return <div>Hello, World!</div>;
+}
+```
+
+- There is a restriction in naming these templates which is you should not put dots (`.`) between the name, like this (`component.WithUseEffect.jsx`). It should only contain one dot that makes the extension file like we're doing above.
+
+3 - After creating your template you can use them to create components or pages as the following:
+
+```sh
+rhc create -c <component_name> --template <template_name>
+```
+
+As for our example it can be used like this:
+
+```sh
+rhc create -c comp --template componentWithUseEffect
+```
+
+- This will create `comp.jsx` component at the `src/components/` folder, and the file will contain the template as written above.
+
+- It can also be used to create the component pages like this:
+
+```sh
+rhc create -p page1 --template componentWithUseEffect
+```
+
+- And of course, you can create multiple components or pages with the same template like this:
+
+```sh
+rhc create -c <component_name_1> <component_name_2> ... --template <template_name>
+```
+
+- The `--template` option can be shortened by `-t`.
+
+- You can always create with TypeScript implementation by adding the `--ts` option at the end of the command line.
+
+- And you can also create your files in a specific folder usin `-f` (or `--folder`) option.
 
 ### Creating redux implementation
 
