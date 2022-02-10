@@ -1,24 +1,36 @@
 /**
  * @function storeTemplateTs
- * @description this function is used to generate the redux store implementation template in typescript.
- * @param {string} reduxName - the name of the redux.
- * @returns {string} the typescript implementation template.
- * @version 1.0.0
+ * @description this function returns redux default store template in typescript.
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-exports.storeTemplateTs = (reduxName) => {
-  let redux = reduxName.toLowerCase();
-  return `import { createStore, combineReducers } from "redux";
+exports.storeTemplateTs =
+  () => `import { applyMiddleware, compose, createStore } from "redux";
+import { mainReducer } from "./reducers";
 
-// import ${redux} reducers
-import {} from "../reducers";
+/**
+ * the main redux state, with all the reducers
+ */
+export const mainStore = createStore(mainReducer, compose(applyMiddleware(thunk)));
 
-// define app reducers
-const appReducers = combineReducers({
-    // you need to add your reducers here
-});
+export type StateInterface = ReturnType<typeof mainStore.getState>;
 
-// export store
-export const store = createStore(appReducers);
+/**
+ * list of action types
+ */
+export type ActionType = "UPDATE_GENERAL";
+
+export interface Action<T> {
+  type: ActionType;
+  payload: Partial<T>;
+}
+
+export type ThunkResult<A = Record<string, unknown>, E = Record<string, unknown>> = ThunkAction<
+  void,
+  StateInterface,
+  E,
+  Action<A>
+>;
+
+export type Dispatch<A> = ThunkDispatch<StateInterface, Record<string, unknown>, Action<A>>;
+
 `;
-};

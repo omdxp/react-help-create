@@ -28,7 +28,7 @@ yargs
         .array("-p")
         .positional("-r", {
           alias: "--redux",
-          type: "string",
+          type: "boolean",
           describe: "to create redux implementation",
         })
         .option("js", {
@@ -63,7 +63,7 @@ yargs
         } else if (page) {
           page.forEach((p) => createPage(p, js, ts, folder, template));
         } else if (redux) {
-          createRedux(redux, js, ts);
+          createRedux(js, ts);
         } else {
           console.log("Check usage: rhc create --help");
         }
