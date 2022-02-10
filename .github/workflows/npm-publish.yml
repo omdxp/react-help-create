@@ -1,0 +1,64 @@
+name: "🚀 publish"
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish-npm:
+    name: 🚀 NPM publish
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: ☄️ checkout
+        uses: actions/checkout@v2
+
+      - name: 🐱‍🏍 node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registery-url: https://registry.npmjs.org/
+
+      - name: 📦 install dependencies
+        run: npm install
+
+      - name: 🐱‍👤 create .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
+
+      - name: 🚀 publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
+  publish-gpr:
+    name: 🚀 GPR publish
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://npm.pkg.github.com/
+
+      - name: 📦 install dependencies
+        run: npm install
+
+      - name: 🐱‍👤 create .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
+
+      - name: 🐱‍🏍 prepare gpr
+        run: node prepare-gpr.js
+
+      - name: 🚀 publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
