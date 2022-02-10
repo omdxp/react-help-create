@@ -9,8 +9,8 @@ const fs = require("file-system");
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.deleteComponents = (components, folder) => {
+  const path = folder === "" ? `src/components/` : `src/components/${folder}/`;
   if (components.length === 0 && folder !== "") {
-    const path = `src/components/${folder}/`;
     try {
       fs.rmdirSync(path);
       console.log(`${path} deleted`);
@@ -20,26 +20,12 @@ exports.deleteComponents = (components, folder) => {
     return;
   }
   components.forEach((component) => {
-    const path =
-      folder === "" ? `src/components/` : `src/components/${folder}/`;
-    if (fs.existsSync(`${path}${component.toLowerCase()}.tsx`)) {
-      fs.unlink(`${path}${component.toLowerCase()}.tsx`, (err) => {
-        if (err) {
-          console.log(`Unable to delete ${component} component`);
-        } else {
-          console.log(`${path}${component.toLowerCase()}.tsx deleted`);
-        }
-      });
-    } else if (fs.existsSync(`${path}${component.toLowerCase()}.jsx`)) {
-      fs.unlink(`${path}${component.toLowerCase()}.jsx`, (err) => {
-        if (err) {
-          console.log(`Unable to delete ${component} component`);
-        } else {
-          console.log(`${path}${component.toLowerCase()}.jsx deleted`);
-        }
-      });
-    } else {
-      console.log(`component ${component} does not exist`);
+    const _path = `${path}${component}/`;
+    try {
+      fs.rmdirSync(_path);
+      console.log(`${_path} deleted`);
+    } catch (err) {
+      console.log(`${_path} does not exist`);
     }
   });
 };

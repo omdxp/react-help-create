@@ -7,7 +7,6 @@
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.pageFunctionTemplateTs = (pageName) => {
-  let page = pageName.charAt(0).toUpperCase() + pageName.slice(1);
-  return `// write your ${page} functions here
+  return `// write your ${pageName} functions here
 export {};`;
 };

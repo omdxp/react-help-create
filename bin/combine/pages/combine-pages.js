@@ -5,7 +5,7 @@ const fs = require("file-system");
  * @description this function is used to combine pages in a specific folder.
  * @param {Array} pages - array of pages to be combined.
  * @param {string} folder - the name or path of folder that combines the pages.
- * @version 1.0.0
+ * @version 2.0.0
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.combinePages = (pages, folder) => {
@@ -13,38 +13,35 @@ exports.combinePages = (pages, folder) => {
     console.log("Please provide at least 2 pages");
     return;
   }
+  const path = "src/pages/";
+  const _path = `${path}${folder}/`;
   let folders = [];
   pages.forEach((page) => {
-    fs.readdirSync(`src/pages/`)
-      .filter((f) => f === page.toLowerCase())
-      .forEach((f) => {
-        folders.push(f);
-      });
+    fs.readdirSync(path)
+      .filter((f) => f === page)
+      .forEach((f) => folders.push(f));
   });
-  if (folders.length < pages.length) {
-    console.log("Check if these pages do exist");
+  if (folders.length < screens.length) {
+    console.log("Check if all of these screens exist");
     return;
   }
-  const path = `src/pages/${folder}`;
-  if (!fs.existsSync(path)) {
-    fs.mkdirSync(path);
+  if (!fs.existsSync(_path)) {
+    fs.mkdirSync(_path);
   } else {
-    console.log(`${path} already exist`);
-    console.log(`Writing new files...`);
+    console.log(`${_path} already exist`);
+    console.log("Writing new files...");
   }
   folders.forEach((f) => {
-    const path = `src/pages/${folder}/${f}/`;
-    if (fs.existsSync(path)) {
-      console.log(`${path} already exist`);
+    if (fs.existsSync(`${_path}${f}`)) {
+      console.log(`${_path}${f}/ already exist`);
     } else {
-      fs.renameSync(`src/pages/${f}/`, path, (err) => {
+      fs.rename(`${path}${f}/`, `${_path}${f}`, (err) => {
         if (err) {
-          console.log(`Cannot move ${f} page`);
+          console.log(`Cannot move ${f} screen`);
         } else {
-          console.log(`${f} page moved to src/pages/${folder}/`);
+          console.log(`${f} screen moved to ${_path}`);
         }
       });
-      console.log(`${f} page moved to src/pages/${folder}/`);
     }
   });
 };

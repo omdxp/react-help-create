@@ -9,25 +9,23 @@ const fs = require("file-system");
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.deletePages = (pages, folder) => {
-  if (pages.length === 0 && folder !== "") {
-    const path = `src/pages/${folder}/`;
+  const path = folder === "" ? `src/pages/` : `src/pages/${folder}/`;
+  if (screens.length === 0 && folder !== "") {
     try {
       fs.rmdirSync(path);
       console.log(`${path} deleted`);
     } catch (err) {
       console.log(`${path} does not exist`);
     }
+    return;
   }
   pages.forEach((page) => {
-    const path =
-      folder === ""
-        ? `src/pages/${page.toLowerCase()}/`
-        : `src/pages/${folder}/${page.toLowerCase()}`;
+    const _path = `${path}${page}`;
     try {
-      fs.rmdirSync(path);
-      console.log(`${path} deleted`);
+      fs.rmdirSync(_path);
+      console.log(`${_path} deleted`);
     } catch (err) {
-      console.log(`${path} does not exist`);
+      console.log(`${_path} does not exist`);
     }
   });
 };

@@ -1,24 +1,21 @@
 /**
  * @function storeTemplateJs
- * @description this function is used to generate the redux store implementation template in javascript.
- * @param {string} reduxName - the name of the redux.
- * @returns {string} the javascript implementation template.
- * @version 1.0.0
+ * @description this function returns redux default store template in javascript.
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-exports.storeTemplateJs = (reduxName) => {
-  let redux = reduxName.toLowerCase();
-  return `import { createStore, combineReducers } from "redux";
+exports.storeTemplateJs =
+  () => `import { applyMiddleware, compose, createStore } from "redux";
+import { mainReducer } from "./reducers";
 
-// import ${redux} reducers
-import {} from "../reducers";
+/**
+ * the main redux state, with all the reducers
+ */
+export const mainStore = createStore(mainReducer, compose(applyMiddleware(thunk)));
 
-// define app reducers
-const appReducers = combineReducers({
-    // you need to add your reducers here
-});
-
-// export store
-export const store = createStore(appReducers);
-`;
+/**
+ * Creates a new redux state each time this function is called, this is used only for unit tests, to ensure that we have fresh state on each individual test
+ */
+export const createMainStore = () => {
+  return createStore(mainReducer, compose(applyMiddleware(thunk)));
 };
+`;

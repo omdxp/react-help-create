@@ -3,12 +3,11 @@ const fs = require("file-system");
 /**
  * @function deleteRedux
  * @description this function is used to delete redux implementation that exists.
- * @param {string} reduxName - the redux folder name.
- * @version 1.0.0
+ * @version 2.0.0
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
-exports.deleteRedux = (reduxName) => {
-  const path = `src/${reduxName.toLowerCase()}/`;
+exports.deleteRedux = () => {
+  const path = `src/redux/`;
   try {
     fs.rmdirSync(path);
     console.log(`${path} deleted`);
