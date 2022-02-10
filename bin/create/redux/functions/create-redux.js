@@ -20,7 +20,7 @@ const {
  * @description this function is used to create a redux implemenation.
  * @param {boolean} js - if true, the javascript implementation will be created.
  * @param {boolean} ts - if true, the typescript implementation will be created.
- * @version 1.0.0
+ * @version 2.0.0
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.createRedux = (js, ts) => {
