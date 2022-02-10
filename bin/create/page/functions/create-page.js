@@ -45,11 +45,11 @@ exports.createPage = (pageName, js, ts, folder, template) => {
             encoding: "utf8",
             flag: "r",
           });
-          fs.writeFile(`${path}/index.tsx`, file, (err) => {
+          fs.writeFile(`${path}index.tsx`, file, (err) => {
             if (err) {
               console.log(`Unable to create ${page} page`);
             } else {
-              console.log(`${path}/index.tsx created`);
+              console.log(`${path}index.tsx created`);
             }
           });
           fs.writeFile(
@@ -74,11 +74,11 @@ exports.createPage = (pageName, js, ts, folder, template) => {
           console.log(`.template/${template} file does not exist`);
         }
       } else {
-        fs.writeFile(`${path}/index.tsx`, pageTemplateTs(page), (err) => {
+        fs.writeFile(`${path}index.tsx`, pageTemplateTs(page), (err) => {
           if (err) {
             console.log(`Unable to create ${pageName} page ui`);
           } else {
-            console.log(`${path}/index.tsx created`);
+            console.log(`${path}index.tsx created`);
           }
         });
         fs.writeFile(
@@ -111,11 +111,11 @@ exports.createPage = (pageName, js, ts, folder, template) => {
             encoding: "utf8",
             flag: "r",
           });
-          fs.writeFile(`${path}/index.jsx`, file, (err) => {
+          fs.writeFile(`${path}index.jsx`, file, (err) => {
             if (err) {
               console.log(`Unable to create ${page} page`);
             } else {
-              console.log(`${path}/index.jsx created`);
+              console.log(`${path}index.jsx created`);
             }
           });
           fs.writeFile(
@@ -140,11 +140,11 @@ exports.createPage = (pageName, js, ts, folder, template) => {
           console.log(`.template/${template} file does not exist`);
         }
       } else {
-        fs.writeFile(`${path}/index.jsx`, pageTemplateJs(page), (err) => {
+        fs.writeFile(`${path}index.jsx`, pageTemplateJs(page), (err) => {
           if (err) {
             console.log(`Unable to create ${page} page`);
           } else {
-            console.log(`${path}/index.jsx created`);
+            console.log(`${path}index.jsx created`);
           }
         });
         fs.writeFile(
