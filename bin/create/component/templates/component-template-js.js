@@ -7,12 +7,11 @@
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.componentTemplateJs = (componentName) => {
-  let component =
-    componentName.charAt(0).toUpperCase() + componentName.slice(1);
-  return `// export ${component} component
-const ${component} = () => {
-    return <div>${component} component created!</div>;
+  return `import styles from './styles.css';
+
+const ${componentName} = () => {
+    return <div>${componentName} component created!</div>;
 }
-export default ${component};
+export default ${componentName};
 `;
 };

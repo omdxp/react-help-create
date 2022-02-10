@@ -7,17 +7,14 @@
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.componentTemplateTs = (componentName) => {
-  let component =
-    componentName.charAt(0).toUpperCase() + componentName.slice(1);
   return `import { FC } from "react";
+import styles from "./styles.css";
 
-// define ${component} props interface
-interface ${component}Props {}
+interface ${componentName}Props {}
 
-// export ${component} component
-const ${component}: FC<${component}Props> = ({}: ${component}Props): JSX.Element => {
-    return <div>${component} component created!</div>;
+const ${componentName}: FC<${componentName}Props> = ({}: ${componentName}Props): JSX.Element => {
+    return <div>${componentName} component created!</div>;
 }
-export default ${component};
+export default ${componentName};
 `;
 };
