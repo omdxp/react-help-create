@@ -44,7 +44,7 @@ yarn add react-help-create --dev
 
 # How to use it?
 
-Please follow [this documentation](./docs/DOCS.md) to learn how to use this command line.
+Please follow [this documentation](./docs/TOC.md) to learn how to use this command line.
 
 # Contributing
 

@@ -22,7 +22,7 @@ exports.combinePages = (pages, folder) => {
       .forEach((f) => folders.push(f));
   });
   if (folders.length < screens.length) {
-    console.log("Check if all of these screens exist");
+    console.log("Check if all of these pages exist");
     return;
   }
   if (!fs.existsSync(_path)) {
@@ -37,9 +37,9 @@ exports.combinePages = (pages, folder) => {
     } else {
       fs.rename(`${path}${f}/`, `${_path}${f}`, (err) => {
         if (err) {
-          console.log(`Cannot move ${f} screen`);
+          console.log(`Cannot move ${f} page`);
         } else {
-          console.log(`${f} screen moved to ${_path}`);
+          console.log(`${f} page moved to ${_path}`);
         }
       });
     }
