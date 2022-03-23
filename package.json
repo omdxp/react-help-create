@@ -1,6 +1,6 @@
 {
   "name": "react-help-create",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "This command line helps you create components, pages and even redux implementation for your react project.",
   "main": "bin/index.js",
   "bin": {
