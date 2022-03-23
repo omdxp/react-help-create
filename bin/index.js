@@ -5,6 +5,7 @@ const fs = require("file-system");
 const { createComponent, createPage, createRedux } = require("./create");
 const { deleteComponents, deletePages, deleteRedux } = require("./delete");
 const { combineComponents, combinePages } = require("./combine");
+const { rootChecker } = require("./utils");
 
 yargs
   .scriptName("rhc")
@@ -54,7 +55,7 @@ yargs
         });
     },
     (argv) => {
-      if (fs.existsSync("package.json")) {
+      if (rootChecker()) {
         let { component, page, redux, js, ts, folder, template } = argv;
         // check if project is written in typescript
         let faf = fs.readdirSync("./src/"); // folders and files
@@ -110,7 +111,7 @@ yargs
         });
     },
     (argv) => {
-      if (fs.existsSync("package.json")) {
+      if (rootChecker()) {
         const { component, page, redux, folder } = argv;
         if (component) {
           deleteComponents(component, folder);
@@ -153,7 +154,7 @@ yargs
         });
     },
     (argv) => {
-      if (fs.existsSync("package.json")) {
+      if (rootChecker()) {
         const { components, pages, folder } = argv;
         if (components) {
           combineComponents(components, folder);
