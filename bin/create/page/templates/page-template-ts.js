@@ -7,11 +7,11 @@
  */
 exports.pageTemplateTs = (pageName) => {
   return `import { FC } from "react";
-import styles from "./styles.css";
+import "./styles.css";
 
 interface ${pageName}Props {}
 
-const ${pageName}: FC<${pageName}Props> = ({}: ${pageName}Props): JSX.Element => {
+const ${pageName}: FC<${pageName}Props> = ({}: ${pageName}Props) => {
     return <div>${pageName} page created!</div>;
 }
 export default ${pageName};

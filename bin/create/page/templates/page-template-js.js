@@ -6,7 +6,7 @@
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.pageTemplateJs = (pageName) => {
-  return `import styles from './styles.css';
+  return `import "./styles.css";
 
 const ${pageName} = () => {
     return <div>${pageName} page created!</div>;

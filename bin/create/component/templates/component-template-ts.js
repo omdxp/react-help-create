@@ -8,11 +8,11 @@
  */
 exports.componentTemplateTs = (componentName) => {
   return `import { FC } from "react";
-import styles from "./styles.css";
+import "./styles.css";
 
 interface ${componentName}Props {}
 
-const ${componentName}: FC<${componentName}Props> = ({}: ${componentName}Props): JSX.Element => {
+const ${componentName}: FC<${componentName}Props> = ({}: ${componentName}Props) => {
     return <div>${componentName} component created!</div>;
 }
 export default ${componentName};
