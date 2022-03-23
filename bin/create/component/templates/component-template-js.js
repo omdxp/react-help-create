@@ -7,7 +7,7 @@
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.componentTemplateJs = (componentName) => {
-  return `import styles from './styles.css';
+  return `import "./styles.css";
 
 const ${componentName} = () => {
     return <div>${componentName} component created!</div>;
