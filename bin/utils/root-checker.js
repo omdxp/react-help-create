@@ -8,5 +8,5 @@ const fs = require("file-system");
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.rootChecker = () => {
-  return fs.existsSync("package.json");
+  return fs.existsSync("package.json") && fs.existsSync("src/");
 };
