@@ -5,7 +5,7 @@ const fs = require("file-system");
 const { createComponent, createPage, createRedux } = require("./create");
 const { deleteComponents, deletePages, deleteRedux } = require("./delete");
 const { combineComponents, combinePages } = require("./combine");
-const { rootChecker, languageChecker } = require("./utils");
+const { rootChecker, languageChecker, loadConfig } = require("./utils");
 
 yargs
   .scriptName("rhc")
@@ -57,6 +57,12 @@ yargs
     (argv) => {
       if (rootChecker()) {
         let { component, page, redux, js, ts, folder, template } = argv;
+        try {
+          console.log(loadConfig());
+        } catch (e) {
+          console.log(e);
+        }
+        return;
         // check if project is written in typescript
         ts = languageChecker() === "ts" ? true : ts;
         if (component) {
