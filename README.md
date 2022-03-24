@@ -42,6 +42,12 @@ Or
 yarn add react-help-create --dev
 ```
 
+- If you want to use it without installing it (using npm cache) run:
+
+```sh
+npx react-help-create --help
+```
+
 # How to use it?
 
 Please follow [this documentation](./docs/TOC.md) to learn how to use this command line.

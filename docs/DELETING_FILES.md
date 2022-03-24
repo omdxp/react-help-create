@@ -83,3 +83,19 @@ rhc delete -r
 ```sh
 src/redux/ does not exist
 ```
+
+## Configuration
+
+- To delete a configuration file run:
+
+```sh
+rhc delete --config
+```
+
+- This will delete the `rhc.config.json` file at the root of the project.
+
+- If `rhc.config.json` does not exist, `rhc` will prompt:
+
+```sh
+rhc.config.json does not exist
+```
