@@ -1,4 +1,5 @@
 const fs = require("file-system");
+const { config } = require("./configs");
 
 /**
  * @function loadConfig
@@ -10,7 +11,25 @@ const fs = require("file-system");
  */
 exports.loadConfig = () => {
   try {
-    return JSON.parse(fs.readFileSync("./rhc.config.json"));
+    const {
+      withCSS,
+      withFunctions,
+      defaultExports,
+      componentsRoot,
+      pagesRoot,
+      reduxRoot,
+    } = JSON.parse(fs.readFileSync("./rhc.config.json"));
+    config.withCSS = typeof withCSS === "boolean" ? withCSS : true;
+    config.withFunctions =
+      typeof withFunctions === "boolean" ? withFunctions : true;
+    config.defaultExports =
+      typeof defaultExports === "boolean" ? defaultExports : true;
+    config.componentsRoot =
+      typeof componentsRoot === "string" ? componentsRoot : "./src/components";
+    config.pagesRoot =
+      typeof pagesRoot === "string" ? pagesRoot : "./src/pages";
+    config.reduxRoot =
+      typeof reduxRoot === "string" ? reduxRoot : "./src/redux";
   } catch (e) {
     throw new Error(
       "The configuration file could not be loaded. Please make sure that the file exists and is valid."
