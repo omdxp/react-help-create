@@ -4,6 +4,7 @@ const {
   componentTemplateTs,
   stylesTemplate,
 } = require("../templates");
+const { config } = require("../../../utils");
 
 /**
  * @function createComponent
@@ -17,6 +18,7 @@ const {
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.createComponent = (componentName, js, ts, folder, template) => {
+  const { withCSS, withProps, defaultExports, componentsRoot } = config;
   let component =
     componentName.charAt(0).toUpperCase() + componentName.slice(1);
   if (componentName.includes("-")) {
@@ -29,12 +31,12 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
   if (ts) {
     const path =
       folder === ""
-        ? `src/components/${componentName.toLowerCase()}/index.tsx`
-        : `src/components/${folder}/${componentName.toLowerCase()}/index.tsx`;
+        ? `${componentsRoot}/${componentName.toLowerCase()}/index.tsx`
+        : `${componentsRoot}/${folder}/${componentName.toLowerCase()}/index.tsx`;
     const stylesPath =
       folder === ""
-        ? `src/components/${componentName.toLowerCase()}/styles.css`
-        : `src/components/${folder}/${componentName.toLowerCase()}/styles.css`;
+        ? `${componentsRoot}/${componentName.toLowerCase()}/styles.css`
+        : `${componentsRoot}/${folder}/${componentName.toLowerCase()}/styles.css`;
     if (fs.existsSync(path)) {
       console.log(`${path} already exist`);
     } else {
@@ -56,6 +58,31 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
               console.log(`${path} created`);
             }
           });
+          withCSS &&
+            fs.writeFile(stylesPath, stylesTemplate(component), (err) => {
+              if (err) {
+                console.log(`Unable to create ${component} component styles`);
+              } else {
+                console.log(`${stylesPath} created`);
+              }
+            });
+        } else {
+          console.log(`.template/${template} file does not exist`);
+        }
+      } else {
+        fs.writeFile(
+          path,
+          componentTemplateTs(component, withCSS, defaultExports, withProps),
+          (err) => {
+            if (err) {
+              console.log(err);
+              console.log(`Unable to create ${component} component`);
+            } else {
+              console.log(`${path} created`);
+            }
+          }
+        );
+        withCSS &&
           fs.writeFile(stylesPath, stylesTemplate(component), (err) => {
             if (err) {
               console.log(`Unable to create ${component} component styles`);
@@ -63,36 +90,17 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
               console.log(`${stylesPath} created`);
             }
           });
-        } else {
-          console.log(`.template/${template} file does not exist`);
-        }
-      } else {
-        fs.writeFile(path, componentTemplateTs(component), (err) => {
-          if (err) {
-            console.log(err);
-            console.log(`Unable to create ${component} component`);
-          } else {
-            console.log(`${path} created`);
-          }
-        });
-        fs.writeFile(stylesPath, stylesTemplate(component), (err) => {
-          if (err) {
-            console.log(`Unable to create ${component} component styles`);
-          } else {
-            console.log(`${stylesPath} created`);
-          }
-        });
       }
     }
   } else {
     const path =
       folder === ""
-        ? `src/components/${componentName.toLowerCase()}/index.jsx`
-        : `src/components/${folder}/${componentName.toLowerCase()}/index.jsx`;
+        ? `${componentsRoot}/${componentName.toLowerCase()}/index.jsx`
+        : `${componentsRoot}/${folder}/${componentName.toLowerCase()}/index.jsx`;
     const stylesPath =
       folder === ""
-        ? `src/components/${componentName.toLowerCase()}/styles.css`
-        : `src/components/${folder}/${componentName.toLowerCase()}/styles.css`;
+        ? `${componentsRoot}/${componentName.toLowerCase()}/styles.css`
+        : `${componentsRoot}/${folder}/${componentName.toLowerCase()}/styles.css`;
     if (fs.existsSync(path)) {
       console.log(`${path} already exist`);
     } else {
@@ -114,6 +122,30 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
               console.log(`${path} created`);
             }
           });
+          withCSS &&
+            fs.writeFile(stylesPath, stylesTemplate(component), (err) => {
+              if (err) {
+                console.log(`Unable to create ${component} component styles`);
+              } else {
+                console.log(`${stylesPath} created`);
+              }
+            });
+        } else {
+          console.log(`.template/${template} file does not exist`);
+        }
+      } else {
+        fs.writeFile(
+          path,
+          componentTemplateJs(component, withCSS, defaultExports),
+          (err) => {
+            if (err) {
+              console.log(`Unable to create ${component} component`);
+            } else {
+              console.log(`${path} created`);
+            }
+          }
+        );
+        withCSS &&
           fs.writeFile(stylesPath, stylesTemplate(component), (err) => {
             if (err) {
               console.log(`Unable to create ${component} component styles`);
@@ -121,24 +153,6 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
               console.log(`${stylesPath} created`);
             }
           });
-        } else {
-          console.log(`.template/${template} file does not exist`);
-        }
-      } else {
-        fs.writeFile(path, componentTemplateJs(component), (err) => {
-          if (err) {
-            console.log(`Unable to create ${component} component`);
-          } else {
-            console.log(`${path} created`);
-          }
-        });
-        fs.writeFile(stylesPath, stylesTemplate(component), (err) => {
-          if (err) {
-            console.log(`Unable to create ${component} component styles`);
-          } else {
-            console.log(`${stylesPath} created`);
-          }
-        });
       }
     }
   }

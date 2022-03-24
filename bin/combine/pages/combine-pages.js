@@ -1,4 +1,5 @@
 const fs = require("file-system");
+const { config } = require("../../utils");
 
 /**
  * @function combinePages
@@ -13,7 +14,8 @@ exports.combinePages = (pages, folder) => {
     console.log("Please provide at least 2 pages");
     return;
   }
-  const path = "src/pages/";
+  const { pagesRoot } = config;
+  const path = `${pagesRoot}/`;
   const _path = `${path}${folder}/`;
   let folders = [];
   pages.forEach((page) => {
@@ -21,7 +23,7 @@ exports.combinePages = (pages, folder) => {
       .filter((f) => f === page)
       .forEach((f) => folders.push(f));
   });
-  if (folders.length < screens.length) {
+  if (folders.length < pages.length) {
     console.log("Check if all of these pages exist");
     return;
   }

@@ -6,6 +6,7 @@ const {
   pageFunctionTemplateTs,
   stylesTemplate,
 } = require("../templates");
+const { config } = require("../../../utils");
 
 /**
  * @function createPage
@@ -19,6 +20,8 @@ const {
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.createPage = (pageName, js, ts, folder, template) => {
+  const { withCSS, withFunctions, withProps, defaultExports, pagesRoot } =
+    config;
   let page = pageName.charAt(0).toUpperCase() + pageName.slice(1);
   if (pageName.includes("-")) {
     page = "";
@@ -29,8 +32,8 @@ exports.createPage = (pageName, js, ts, folder, template) => {
   }
   const path =
     folder === ""
-      ? `src/pages/${pageName.toLowerCase()}/`
-      : `src/pages/${folder}/${pageName.toLowerCase()}/`;
+      ? `${pagesRoot}/${pageName.toLowerCase()}/`
+      : `${pagesRoot}/${folder}/${pageName.toLowerCase()}/`;
   if (fs.existsSync(path)) {
     console.log(`${path} already exist`);
   } else {
@@ -52,6 +55,42 @@ exports.createPage = (pageName, js, ts, folder, template) => {
               console.log(`${path}index.tsx created`);
             }
           });
+          withFunctions &&
+            fs.writeFile(
+              `${path}functions/index.ts`,
+              pageFunctionTemplateTs(page),
+              (err) => {
+                if (err) {
+                  console.log(`Unable to create ${page} page functions`);
+                } else {
+                  console.log(`${path}functions/index.ts created`);
+                }
+              }
+            );
+          withCSS &&
+            fs.writeFile(`${path}styles.css`, stylesTemplate(page), (err) => {
+              if (err) {
+                console.log(`Unable to create ${page} component styles`);
+              } else {
+                console.log(`${path}styles.css created`);
+              }
+            });
+        } else {
+          console.log(`.template/${template} file does not exist`);
+        }
+      } else {
+        fs.writeFile(
+          `${path}index.tsx`,
+          pageTemplateTs(page, withCSS, defaultExports, withProps),
+          (err) => {
+            if (err) {
+              console.log(`Unable to create ${pageName} page ui`);
+            } else {
+              console.log(`${path}index.tsx created`);
+            }
+          }
+        );
+        withFunctions &&
           fs.writeFile(
             `${path}functions/index.ts`,
             pageFunctionTemplateTs(page),
@@ -63,6 +102,7 @@ exports.createPage = (pageName, js, ts, folder, template) => {
               }
             }
           );
+        withCSS &&
           fs.writeFile(`${path}styles.css`, stylesTemplate(page), (err) => {
             if (err) {
               console.log(`Unable to create ${page} component styles`);
@@ -70,35 +110,6 @@ exports.createPage = (pageName, js, ts, folder, template) => {
               console.log(`${path}styles.css created`);
             }
           });
-        } else {
-          console.log(`.template/${template} file does not exist`);
-        }
-      } else {
-        fs.writeFile(`${path}index.tsx`, pageTemplateTs(page), (err) => {
-          if (err) {
-            console.log(`Unable to create ${pageName} page ui`);
-          } else {
-            console.log(`${path}index.tsx created`);
-          }
-        });
-        fs.writeFile(
-          `${path}functions/index.ts`,
-          pageFunctionTemplateTs(page),
-          (err) => {
-            if (err) {
-              console.log(`Unable to create ${page} page functions`);
-            } else {
-              console.log(`${path}functions/index.ts created`);
-            }
-          }
-        );
-        fs.writeFile(`${path}styles.css`, stylesTemplate(page), (err) => {
-          if (err) {
-            console.log(`Unable to create ${page} component styles`);
-          } else {
-            console.log(`${path}styles.css created`);
-          }
-        });
       }
     } else {
       // check if template file exist
@@ -118,6 +129,42 @@ exports.createPage = (pageName, js, ts, folder, template) => {
               console.log(`${path}index.jsx created`);
             }
           });
+          withFunctions &&
+            fs.writeFile(
+              `${path}functions/index.js`,
+              pageFunctionTemplateJs(page),
+              (err) => {
+                if (err) {
+                  console.log(`Unable to create ${page} page functions`);
+                } else {
+                  console.log(`${path}functions/index.js created`);
+                }
+              }
+            );
+          withCSS &&
+            fs.writeFile(`${path}styles.css`, stylesTemplate(page), (err) => {
+              if (err) {
+                console.log(`Unable to create ${page} component styles`);
+              } else {
+                console.log(`${path}styles.css created`);
+              }
+            });
+        } else {
+          console.log(`.template/${template} file does not exist`);
+        }
+      } else {
+        fs.writeFile(
+          `${path}index.jsx`,
+          pageTemplateJs(page, withCSS, defaultExports),
+          (err) => {
+            if (err) {
+              console.log(`Unable to create ${page} page`);
+            } else {
+              console.log(`${path}index.jsx created`);
+            }
+          }
+        );
+        withFunctions &&
           fs.writeFile(
             `${path}functions/index.js`,
             pageFunctionTemplateJs(page),
@@ -129,6 +176,7 @@ exports.createPage = (pageName, js, ts, folder, template) => {
               }
             }
           );
+        withCSS &&
           fs.writeFile(`${path}styles.css`, stylesTemplate(page), (err) => {
             if (err) {
               console.log(`Unable to create ${page} component styles`);
@@ -136,35 +184,6 @@ exports.createPage = (pageName, js, ts, folder, template) => {
               console.log(`${path}styles.css created`);
             }
           });
-        } else {
-          console.log(`.template/${template} file does not exist`);
-        }
-      } else {
-        fs.writeFile(`${path}index.jsx`, pageTemplateJs(page), (err) => {
-          if (err) {
-            console.log(`Unable to create ${page} page`);
-          } else {
-            console.log(`${path}index.jsx created`);
-          }
-        });
-        fs.writeFile(
-          `${path}functions/index.js`,
-          pageFunctionTemplateJs(page),
-          (err) => {
-            if (err) {
-              console.log(`Unable to create ${page} page functions`);
-            } else {
-              console.log(`${path}functions/index.js created`);
-            }
-          }
-        );
-        fs.writeFile(`${path}styles.css`, stylesTemplate(page), (err) => {
-          if (err) {
-            console.log(`Unable to create ${page} component styles`);
-          } else {
-            console.log(`${path}styles.css created`);
-          }
-        });
       }
     }
   }

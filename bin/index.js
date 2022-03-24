@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
 const yargs = require("yargs");
-const fs = require("file-system");
 const { createComponent, createPage, createRedux } = require("./create");
 const { deleteComponents, deletePages, deleteRedux } = require("./delete");
 const { combineComponents, combinePages } = require("./combine");
-const { rootChecker, languageChecker } = require("./utils");
+const { rootChecker, languageChecker, loadConfig, config } = require("./utils");
 
 yargs
   .scriptName("rhc")
@@ -57,6 +56,9 @@ yargs
     (argv) => {
       if (rootChecker()) {
         let { component, page, redux, js, ts, folder, template } = argv;
+        try {
+          loadConfig();
+        } catch (e) {}
         // check if project is written in typescript
         ts = languageChecker() === "ts" ? true : ts;
         if (component) {
@@ -107,6 +109,9 @@ yargs
     (argv) => {
       if (rootChecker()) {
         const { component, page, redux, folder } = argv;
+        try {
+          loadConfig();
+        } catch (e) {}
         if (component) {
           deleteComponents(component, folder);
         } else if (page) {
@@ -150,6 +155,9 @@ yargs
     (argv) => {
       if (rootChecker()) {
         const { components, pages, folder } = argv;
+        try {
+          loadConfig();
+        } catch (e) {}
         if (components) {
           combineComponents(components, folder);
         } else if (pages) {
