@@ -7,7 +7,12 @@ const {
   createRedux,
   createConfig,
 } = require("./create");
-const { deleteComponents, deletePages, deleteRedux } = require("./delete");
+const {
+  deleteComponents,
+  deletePages,
+  deleteRedux,
+  deleteConfig,
+} = require("./delete");
 const { combineComponents, combinePages } = require("./combine");
 const { rootChecker, languageChecker, loadConfig } = require("./utils");
 
@@ -110,6 +115,10 @@ yargs
           type: "boolean",
           describe: "to delete redux implementation",
         })
+        .positional("--config", {
+          type: "boolean",
+          describe: "to delete config file",
+        })
         .option("f", {
           alias: "folder",
           type: "string",
@@ -119,7 +128,7 @@ yargs
     },
     (argv) => {
       if (rootChecker()) {
-        const { component, page, redux, folder } = argv;
+        const { component, page, redux, config, folder } = argv;
         try {
           loadConfig();
         } catch (e) {}
@@ -129,6 +138,8 @@ yargs
           deletePages(page, folder);
         } else if (redux) {
           deleteRedux();
+        } else if (config) {
+          deleteConfig();
         } else {
           console.log("Check usage: rhc delete --help");
         }
