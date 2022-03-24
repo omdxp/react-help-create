@@ -1,4 +1,5 @@
 const fs = require("file-system");
+const { config } = require("../../utils");
 
 /**
  * @function deleteComponents
@@ -9,7 +10,9 @@ const fs = require("file-system");
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.deleteComponents = (components, folder) => {
-  const path = folder === "" ? `src/components/` : `src/components/${folder}/`;
+  const { componentsRoot } = config;
+  const path =
+    folder === "" ? `${componentsRoot}/` : `${componentsRoot}/${folder}/`;
   if (components.length === 0 && folder !== "") {
     try {
       fs.rmdirSync(path);

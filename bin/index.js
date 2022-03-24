@@ -109,6 +109,9 @@ yargs
     (argv) => {
       if (rootChecker()) {
         const { component, page, redux, folder } = argv;
+        try {
+          loadConfig();
+        } catch (e) {}
         if (component) {
           deleteComponents(component, folder);
         } else if (page) {
