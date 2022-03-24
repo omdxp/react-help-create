@@ -1,4 +1,5 @@
 const fs = require("file-system");
+const { config } = require("../../utils");
 
 /**
  * @function deletePages
@@ -9,7 +10,8 @@ const fs = require("file-system");
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.deletePages = (pages, folder) => {
-  const path = folder === "" ? `src/pages/` : `src/pages/${folder}/`;
+  const { pagesRoot } = config;
+  const path = folder === "" ? `${pagesRoot}/` : `${pagesRoot}/${folder}/`;
   if (screens.length === 0 && folder !== "") {
     try {
       fs.rmdirSync(path);
