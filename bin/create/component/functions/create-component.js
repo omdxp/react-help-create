@@ -50,14 +50,18 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
             encoding: "utf8",
             flag: "r",
           });
-          fs.writeFile(path, file, (err) => {
-            if (err) {
-              console.log(err);
-              console.log(`Unable to create ${component} component`);
-            } else {
-              console.log(`${path} created`);
+          fs.writeFile(
+            path,
+            file.replace(/__COMPONENT__/g, component),
+            (err) => {
+              if (err) {
+                console.log(err);
+                console.log(`Unable to create ${component} component`);
+              } else {
+                console.log(`${path} created`);
+              }
             }
-          });
+          );
           withCSS &&
             fs.writeFile(stylesPath, stylesTemplate(component), (err) => {
               if (err) {
@@ -114,14 +118,18 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
             encoding: "utf8",
             flag: "r",
           });
-          fs.writeFile(path, file, (err) => {
-            if (err) {
-              console.log(err);
-              console.log(`Unable to create ${component} component`);
-            } else {
-              console.log(`${path} created`);
+          fs.writeFile(
+            path,
+            file.replace(/__COMPONENT__/g, component),
+            (err) => {
+              if (err) {
+                console.log(err);
+                console.log(`Unable to create ${component} component`);
+              } else {
+                console.log(`${path} created`);
+              }
             }
-          });
+          );
           withCSS &&
             fs.writeFile(stylesPath, stylesTemplate(component), (err) => {
               if (err) {
