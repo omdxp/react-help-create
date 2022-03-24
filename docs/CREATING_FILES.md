@@ -242,7 +242,7 @@ You can create your pages and components with your defined templates by followin
 2. Inside the `.template` folder you can add your template, for example `componentWithUseEffect.tsx` (the file extension doesn't matter so it could be `*.jsx`, `*.js` or `*.tsx`):
 
 ```jsx
-export default function Component() {
+export default function __COMPONENT__() {
   useEffect(() => {}, []);
 
   return (
@@ -254,6 +254,8 @@ export default function Component() {
 ```
 
 - There is a restriction in naming these templates which is you should not put dots (`.`) between the name, like this (`component.WithUseEffect.jsx`). It should only contain one dot that makes the extension file like we're doing above.
+
+- You should type `__COMPONENT__` in the template file and it will be replaced with the component name you want to create.
 
 3. After creating your template you can use them to create components or pages as the following:
 
