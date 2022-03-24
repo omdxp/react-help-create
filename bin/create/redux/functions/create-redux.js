@@ -1,11 +1,5 @@
 const fs = require("file-system");
 const {
-  actionsTemplateJs,
-  actionsTemplateTs,
-  constantsTemplateJs,
-  constantsTemplateTs,
-  reducersTemplateJs,
-  reducersTemplateTs,
   storeTemplateJs,
   storeTemplateTs,
   reducerTemplateTs,
@@ -14,6 +8,7 @@ const {
   reducerTemplateJs,
   actionTemplateJs,
 } = require("../templates");
+const { config } = require("../../../utils");
 
 /**
  * @function createRedux
@@ -24,7 +19,8 @@ const {
  * @author [Omar Belghaouti](https://github.com/Omar-Belghaouti)
  */
 exports.createRedux = (js, ts) => {
-  const path = `src/redux/`;
+  const { reduxRoot } = config;
+  const path = `${reduxRoot}/`;
   if (fs.existsSync(path)) {
     console.log(`${path} already exist`);
   } else {
