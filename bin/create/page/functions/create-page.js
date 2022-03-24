@@ -48,13 +48,17 @@ exports.createPage = (pageName, js, ts, folder, template) => {
             encoding: "utf8",
             flag: "r",
           });
-          fs.writeFile(`${path}index.tsx`, file, (err) => {
-            if (err) {
-              console.log(`Unable to create ${page} page`);
-            } else {
-              console.log(`${path}index.tsx created`);
+          fs.writeFile(
+            `${path}index.tsx`,
+            file.replace(/__COMPONENT__/g, page),
+            (err) => {
+              if (err) {
+                console.log(`Unable to create ${page} page`);
+              } else {
+                console.log(`${path}index.tsx created`);
+              }
             }
-          });
+          );
           withFunctions &&
             fs.writeFile(
               `${path}functions/index.ts`,
@@ -122,13 +126,17 @@ exports.createPage = (pageName, js, ts, folder, template) => {
             encoding: "utf8",
             flag: "r",
           });
-          fs.writeFile(`${path}index.jsx`, file, (err) => {
-            if (err) {
-              console.log(`Unable to create ${page} page`);
-            } else {
-              console.log(`${path}index.jsx created`);
+          fs.writeFile(
+            `${path}index.jsx`,
+            file.replace(/__COMPONENT__/g, page),
+            (err) => {
+              if (err) {
+                console.log(`Unable to create ${page} page`);
+              } else {
+                console.log(`${path}index.jsx created`);
+              }
             }
-          });
+          );
           withFunctions &&
             fs.writeFile(
               `${path}functions/index.js`,
