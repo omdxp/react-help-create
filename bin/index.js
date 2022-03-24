@@ -155,6 +155,9 @@ yargs
     (argv) => {
       if (rootChecker()) {
         const { components, pages, folder } = argv;
+        try {
+          loadConfig();
+        } catch (e) {}
         if (components) {
           combineComponents(components, folder);
         } else if (pages) {

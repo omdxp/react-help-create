@@ -1,4 +1,5 @@
 const fs = require("file-system");
+const { config } = require("../../utils");
 
 /**
  * @function combineComponents
@@ -13,7 +14,8 @@ exports.combineComponents = (components, folder) => {
     console.log("Please provide at least 2 components");
     return;
   }
-  const path = "src/components/";
+  const { componentsRoot } = config;
+  const path = `${componentsRoot}/`;
   const _path = `${path}${folder}/`;
   let folders = [];
   components.forEach((component) => {

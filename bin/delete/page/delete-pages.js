@@ -12,7 +12,7 @@ const { config } = require("../../utils");
 exports.deletePages = (pages, folder) => {
   const { pagesRoot } = config;
   const path = folder === "" ? `${pagesRoot}/` : `${pagesRoot}/${folder}/`;
-  if (screens.length === 0 && folder !== "") {
+  if (pages.length === 0 && folder !== "") {
     try {
       fs.rmdirSync(path);
       console.log(`${path} deleted`);
