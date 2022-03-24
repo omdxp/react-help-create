@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 
 const yargs = require("yargs");
-const { createComponent, createPage, createRedux } = require("./create");
+const {
+  createComponent,
+  createPage,
+  createRedux,
+  createConfig,
+} = require("./create");
 const { deleteComponents, deletePages, deleteRedux } = require("./delete");
 const { combineComponents, combinePages } = require("./combine");
-const { rootChecker, languageChecker, loadConfig, config } = require("./utils");
+const { rootChecker, languageChecker, loadConfig } = require("./utils");
 
 yargs
   .scriptName("rhc")
@@ -31,6 +36,10 @@ yargs
           type: "boolean",
           describe: "to create redux implementation",
         })
+        .positional("--config", {
+          type: "boolean",
+          describe: "to create config file",
+        })
         .option("js", {
           alias: "javascript",
           default: true,
@@ -55,7 +64,7 @@ yargs
     },
     (argv) => {
       if (rootChecker()) {
-        let { component, page, redux, js, ts, folder, template } = argv;
+        let { component, page, redux, config, js, ts, folder, template } = argv;
         try {
           loadConfig();
         } catch (e) {}
@@ -69,6 +78,8 @@ yargs
           page.forEach((p) => createPage(p, js, ts, folder, template));
         } else if (redux) {
           createRedux(js, ts);
+        } else if (config) {
+          createConfig();
         } else {
           console.log("Check usage: rhc create --help");
         }
