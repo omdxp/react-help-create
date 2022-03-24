@@ -1,10 +1,20 @@
 #!/usr/bin/env node
 
 const yargs = require("yargs");
-const { createComponent, createPage, createRedux } = require("./create");
-const { deleteComponents, deletePages, deleteRedux } = require("./delete");
+const {
+  createComponent,
+  createPage,
+  createRedux,
+  createConfig,
+} = require("./create");
+const {
+  deleteComponents,
+  deletePages,
+  deleteRedux,
+  deleteConfig,
+} = require("./delete");
 const { combineComponents, combinePages } = require("./combine");
-const { rootChecker, languageChecker, loadConfig, config } = require("./utils");
+const { rootChecker, languageChecker, loadConfig } = require("./utils");
 
 yargs
   .scriptName("rhc")
@@ -31,6 +41,10 @@ yargs
           type: "boolean",
           describe: "to create redux implementation",
         })
+        .positional("--config", {
+          type: "boolean",
+          describe: "to create config file",
+        })
         .option("js", {
           alias: "javascript",
           default: true,
@@ -55,7 +69,7 @@ yargs
     },
     (argv) => {
       if (rootChecker()) {
-        let { component, page, redux, js, ts, folder, template } = argv;
+        let { component, page, redux, config, js, ts, folder, template } = argv;
         try {
           loadConfig();
         } catch (e) {}
@@ -69,6 +83,8 @@ yargs
           page.forEach((p) => createPage(p, js, ts, folder, template));
         } else if (redux) {
           createRedux(js, ts);
+        } else if (config) {
+          createConfig();
         } else {
           console.log("Check usage: rhc create --help");
         }
@@ -99,6 +115,10 @@ yargs
           type: "boolean",
           describe: "to delete redux implementation",
         })
+        .positional("--config", {
+          type: "boolean",
+          describe: "to delete config file",
+        })
         .option("f", {
           alias: "folder",
           type: "string",
@@ -108,7 +128,7 @@ yargs
     },
     (argv) => {
       if (rootChecker()) {
-        const { component, page, redux, folder } = argv;
+        const { component, page, redux, config, folder } = argv;
         try {
           loadConfig();
         } catch (e) {}
@@ -118,6 +138,8 @@ yargs
           deletePages(page, folder);
         } else if (redux) {
           deleteRedux();
+        } else if (config) {
+          deleteConfig();
         } else {
           console.log("Check usage: rhc delete --help");
         }
