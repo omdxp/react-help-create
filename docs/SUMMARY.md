@@ -76,4 +76,6 @@ src
 
 - As for the `redux` folder you can see there is `index.js` which contain the redux store, and `actions` and `reducers` folders are next to it so you can find only things that are related to redux in one single place.
 
-- This command line can write code in both JavaScript and TypeScript. By default it will use the used language for your React Native project and of course you can override the used language using one of its options.
+- This command line can write code in both JavaScript and TypeScript. By default it will use the used language for your React project and of course you can override the used language using one of its options.
+
+- This command line can be customized by a configuration file that you can create in the root of your project (`rhc.config.json`).

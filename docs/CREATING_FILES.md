@@ -39,7 +39,7 @@ src
 - Where `index.jsx` represents the React FC component that contains the following:
 
 ```jsx
-import styles from "./styles.css";
+import "./styles.css";
 
 const TestComponent = () => {
   return <div>TestComponent component created!</div>;
@@ -143,7 +143,7 @@ pages
 - Where `index.jsx` represent the page which is nothing but a React FC component that contains the following:
 
 ```jsx
-import styles from "./styles.css";
+import "./styles.css";
 
 const TestPage = () => {
   return <div>TestPage page created!</div>;
@@ -455,3 +455,37 @@ export const mainReducer = combineReducers({
   general,
 });
 ```
+
+## Configuration
+
+With the above steps, you can now create a configuration file which will be used by `rhc` to create your files with your custom config.
+
+- To create a default configuration file run:
+
+```sh
+rhc create --config
+```
+
+- This will create a `rhc.config.json` file at the root of your project. The file will contain the following:
+
+```json
+{
+  "withCSS": true,
+  "withFunctions": true,
+  "withProps": true,
+  "defaultExports": true,
+  "componentsRoot": "./src/components",
+  "pagesRoot": "./src/pages",
+  "reduxRoot": "./src/redux"
+}
+```
+
+1. `withCSS`: if true, create `styles.css` file for components and pages, if false, don't create `styles.css` file, default is true.
+2. `withFunctions`: if true, create `functions` folder for pages, if false, don't create `functions` folder, default is true.
+3. `withProps`: if true, create props `interface` for components and pages (in TS only), if false, don't create props `interface`, default is true.
+4. `defaultExports`: if true, create default export for components and pages, if false, create named export for components and pages, default is true.
+5. `componentsRoot`: the root folder for components, default is `./src/components`.
+6. `pagesRoot`: the root folder for pages, default is `./src/pages`.
+7. `reduxRoot`: the root folder for redux, default is `./src/redux`.
+
+- If no configuration file is found or you don't specify some of the configuration, the default configuration will be used.
