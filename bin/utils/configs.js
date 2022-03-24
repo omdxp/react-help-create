@@ -1,6 +1,7 @@
 let config = {
   withCSS: true,
   withFunctions: true,
+  withProps: true,
   defaultExports: true,
   componentsRoot: "./src/components",
   pagesRoot: "./src/pages",

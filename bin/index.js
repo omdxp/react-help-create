@@ -60,8 +60,6 @@ yargs
         try {
           loadConfig();
         } catch (e) {}
-        console.log(config);
-        return;
         // check if project is written in typescript
         ts = languageChecker() === "ts" ? true : ts;
         if (component) {

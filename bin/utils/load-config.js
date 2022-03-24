@@ -14,6 +14,7 @@ exports.loadConfig = () => {
     const {
       withCSS,
       withFunctions,
+      withProps,
       defaultExports,
       componentsRoot,
       pagesRoot,
@@ -22,6 +23,7 @@ exports.loadConfig = () => {
     config.withCSS = typeof withCSS === "boolean" ? withCSS : true;
     config.withFunctions =
       typeof withFunctions === "boolean" ? withFunctions : true;
+    config.withProps = typeof withProps === "boolean" ? withProps : true;
     config.defaultExports =
       typeof defaultExports === "boolean" ? defaultExports : true;
     config.componentsRoot =
