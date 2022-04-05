@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/Omar-Belghaouti/react-help-create.git"
   },
-  "homepage": "https://github.com/Omar-Belghaouti/react-help-create/",
+  "homepage": "https://omar-belghaouti.github.io/react-help-create/",
   "keywords": [
     "react",
     "react-help-create",
@@ -23,7 +23,7 @@
   "author": {
     "email": "omarbelghaouti@gmail.com",
     "name": "Omar Belghaouti",
-    "url": "https://omarbelghaouti.space/"
+    "url": "https://omar-belghaouti.web.app/"
   },
   "license": "MIT",
   "dependencies": {
