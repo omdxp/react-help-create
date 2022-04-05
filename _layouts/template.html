@@ -33,7 +33,7 @@
       <h1 class="project-name">react-help-create</h1>
       <h2 class="project-tagline"></h2>
       {% for page in site.pages %}
-      <a href="{{" page.filename }} class="btn">{{ page.title }}</a>
+      <a href={{ page.filename }} class="btn">{{ page.title }}</a>
       {% endfor %}
       <a href="https://github.com/Omar-Belghaouti/react-help-create" class="btn"
         >View on GitHub</a
