@@ -1,7 +1,6 @@
 ---
 title: Contributing
-layout: template
-filename: CONTRIBUTING.md
+filename: CONTRIBUTING
 ---
 
 # Contributing

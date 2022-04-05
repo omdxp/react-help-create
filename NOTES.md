@@ -1,7 +1,6 @@
 ---
 title: Notes
-layout: template
-filename: NOTES.md
+filename: NOTES
 ---
 
 # Notes

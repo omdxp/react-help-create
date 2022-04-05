@@ -1,7 +1,6 @@
 ---
 title: Deleting Files
-layout: template
-filename: DELETING_FILES.md
+filename: DELETING_FILES
 ---
 
 # Deleting Files

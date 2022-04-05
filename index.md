@@ -1,7 +1,6 @@
 ---
 title: Home
-layout: template
-filename: index.md
+filename: index
 ---
 
 <p align="center">

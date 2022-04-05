@@ -1,7 +1,6 @@
 ---
 title: Creating Files
-layout: template
-filename: CREATING_FILES.md
+filename: CREATING_FILES
 ---
 
 # Creating Files

@@ -1,7 +1,6 @@
 ---
 title: Table of Contents
-layout: template
-filename: TOC.md
+filename: TOC
 ---
 
 # Table of Contents

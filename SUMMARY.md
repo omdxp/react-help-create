@@ -1,7 +1,7 @@
 ---
 title: Summary
 layout: template
-filename: SUMMARY.md
+filename: SUMMARY
 ---
 
 # Summary
