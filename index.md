@@ -1,3 +1,9 @@
+---
+title: Home
+layout: template
+filename: index.md
+---
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/48713070/130338182-bfd64ba3-bdd0-4384-8560-c0c0021a8d02.png" width="350" height="350" alt="react-help-create"/>
 </p>
@@ -48,9 +54,11 @@ yarn add react-help-create --dev
 npx react-help-create --help
 ```
 
+g
+
 # How to use it?
 
-Please follow [this documentation](./docs/TOC.md) to learn how to use this command line.
+Please follow [this documentation](TOC.md) to learn how to use this command line.
 
 # Contributing
 

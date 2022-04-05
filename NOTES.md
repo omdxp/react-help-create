@@ -1,3 +1,9 @@
+---
+title: Notes
+layout: template
+filename: NOTES.md
+---
+
 # Notes
 
 - To see the available commands for `rhc` you can run:

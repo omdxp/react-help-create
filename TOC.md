@@ -1,3 +1,9 @@
+---
+title: Table of Contents
+layout: template
+filename: TOC.md
+---
+
 # Table of Contents
 
 1. [Summary](./SUMMARY.md)

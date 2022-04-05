@@ -1,3 +1,9 @@
+---
+title: Creating Files
+layout: template
+filename: CREATING_FILES.md
+---
+
 # Creating Files
 
 `rhc` provide you more flexibility and easy to use approach to create your files and folders for your componets, pages and redux implementation.

@@ -1,3 +1,9 @@
+---
+title: Combining Files
+layout: template
+filename: COMBINING_FILES.md
+---
+
 # Combining Files
 
 With `rhc` you can combine your components or pages in a specific path.

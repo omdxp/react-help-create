@@ -1,3 +1,9 @@
+---
+title: Summary
+layout: template
+filename: SUMMARY.md
+---
+
 # Summary
 
 This command line help you create your React project in a easy and useful structure by creating components and pages in separate folders in order to distinguish between them.

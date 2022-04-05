@@ -1,3 +1,9 @@
+---
+title: Deleting Files
+layout: template
+filename: DELETING_FILES.md
+---
+
 # Deleting Files
 
 With `rhc` you can delete what you already created with [`create` commands](./CREATING_FILES.md).
