@@ -1,37 +1,57 @@
-## Welcome to GitHub Pages
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/48713070/130338182-bfd64ba3-bdd0-4384-8560-c0c0021a8d02.png" width="350" height="350" alt="react-help-create"/>
+</p>
+<h1 align="center">react-help-create</h1>
+<p align="center">This command line helps you create components, pages and even redux implementation for your react project.</p>
 
-You can use the [editor on GitHub](https://github.com/Omar-Belghaouti/react-help-create/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+<p align="center">
+  <a href="https://github.com/Omar-Belghaouti/react-help-create/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="react-help-create is released under the MIT license." />
+  </a>
+  <a href="https://www.npmjs.com/package/react-help-create">
+    <img src="https://img.shields.io/npm/v/react-help-create?color=e80441&label=react-help-create" alt="Current npm package version." />
+  </a>
+  <a href="https://github.com/Omar-Belghaouti/react-help-create/blob/main/CONTRIBUTING.md">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
+  </a>
+</p>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# How to install it?
 
-### Markdown
+- To install it globally in your operating system run
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```sh
+npm i react-help-create -g
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+Or
 
-### Jekyll Themes
+```sh
+yarn global add react-help-create
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Omar-Belghaouti/react-help-create/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+- To install it as a dev dependency in your react project run
 
-### Support or Contact
+```sh
+npm i react-help-create --save-dev
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Or
+
+```sh
+yarn add react-help-create --dev
+```
+
+- If you want to use it without installing it (using npm cache) run:
+
+```sh
+npx react-help-create --help
+```
+
+# How to use it?
+
+Please follow [this documentation](./docs/TOC.md) to learn how to use this command line.
+
+# Contributing
+
+Please check [this](CONTRIBUTING.md) if you consider to contribute to this project.
