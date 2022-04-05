@@ -1,5 +1,6 @@
 ---
 title: Deleting Files
+layout: template
 filename: DELETING_FILES
 ---
 

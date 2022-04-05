@@ -1,5 +1,6 @@
 ---
 title: Combining Files
+layout: template
 filename: COMBINING_FILES
 ---
 

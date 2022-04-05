@@ -1,5 +1,6 @@
 ---
 title: Contributing
+layout: template
 filename: CONTRIBUTING
 ---
 

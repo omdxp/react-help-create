@@ -1,5 +1,6 @@
 ---
 title: Creating Files
+layout: template
 filename: CREATING_FILES
 ---
 

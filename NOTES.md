@@ -1,5 +1,6 @@
 ---
 title: Notes
+layout: template
 filename: NOTES
 ---
 
