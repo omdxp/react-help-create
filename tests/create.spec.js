@@ -16,8 +16,8 @@ function sleep(ms) {
 }
 
 describe("create component tests", () => {
+  console.log = jest.fn();
   test("should create ts component", async () => {
-    console.log = jest.fn();
     try {
       fs.existsSync("src") && fs.rmdirSync("src");
       createComponent("test", false, true, "", "");
@@ -31,7 +31,6 @@ describe("create component tests", () => {
   });
 
   test("should create js component", async () => {
-    console.log = jest.fn();
     try {
       fs.existsSync("src") && fs.rmdirSync("src");
       createComponent("test", true, false, "", "");
@@ -45,7 +44,6 @@ describe("create component tests", () => {
   });
 
   test("should create ts component in a folder", async () => {
-    console.log = jest.fn();
     try {
       fs.existsSync("src") && fs.rmdirSync("src");
       createComponent("test", false, true, "folder", "");
@@ -63,7 +61,6 @@ describe("create component tests", () => {
   });
 
   test("should create js component in a folder", async () => {
-    console.log = jest.fn();
     try {
       fs.existsSync("src") && fs.rmdirSync("src");
       createComponent("test", true, false, "folder", "");
@@ -122,8 +119,8 @@ describe("create component tests", () => {
 });
 
 describe("create page tests", () => {
+  console.log = jest.fn();
   test("should create ts page", async () => {
-    console.log = jest.fn();
     try {
       fs.existsSync("src") && fs.rmdirSync("src");
       createPage("test", false, true, "", "");
@@ -138,7 +135,6 @@ describe("create page tests", () => {
   });
 
   test("should create js page", async () => {
-    console.log = jest.fn();
     try {
       fs.existsSync("src") && fs.rmdirSync("src");
       createPage("test", true, false, "", "");
@@ -153,7 +149,6 @@ describe("create page tests", () => {
   });
 
   test("should create ts page in a folder", async () => {
-    console.log = jest.fn();
     try {
       fs.existsSync("src") && fs.rmdirSync("src");
       createPage("test", false, true, "folder", "");
@@ -170,7 +165,6 @@ describe("create page tests", () => {
   });
 
   test("should create js page in a folder", async () => {
-    console.log = jest.fn();
     try {
       fs.existsSync("src") && fs.rmdirSync("src");
       createPage("test", true, false, "folder", "");
@@ -214,6 +208,39 @@ describe("create page tests", () => {
       );
       expect(fs.existsSync("./src/pages/folder/test/index.tsx")).toBe(true);
       expect(fs.existsSync("./src/pages/folder/test/styles.css")).toBe(true);
+      fs.rmdirSync("src");
+    } catch (err) {
+      fail(err);
+    }
+  });
+});
+
+describe("create redux tests", () => {
+  console.log = jest.fn();
+  test("should create redux in ts", async () => {
+    try {
+      fs.existsSync("src") && fs.rmdirSync("src");
+      createRedux(false, true);
+      await sleep(1000);
+      expect(fs.existsSync("./src/redux/index.ts")).toBe(true);
+      expect(fs.existsSync("./src/redux/actions/general/index.ts")).toBe(true);
+      expect(fs.existsSync("./src/redux/reducers/index.ts")).toBe(true);
+      expect(fs.existsSync("./src/redux/reducers/general/index.ts")).toBe(true);
+      fs.rmdirSync("src");
+    } catch (err) {
+      fail(err);
+    }
+  });
+
+  test("should create redux in js", async () => {
+    try {
+      fs.existsSync("src") && fs.rmdirSync("src");
+      createRedux(true, false);
+      await sleep(1000);
+      expect(fs.existsSync("./src/redux/index.js")).toBe(true);
+      expect(fs.existsSync("./src/redux/actions/general/index.js")).toBe(true);
+      expect(fs.existsSync("./src/redux/reducers/index.js")).toBe(true);
+      expect(fs.existsSync("./src/redux/reducers/general/index.js")).toBe(true);
       fs.rmdirSync("src");
     } catch (err) {
       fail(err);
