@@ -247,3 +247,32 @@ describe("create redux tests", () => {
     }
   });
 });
+
+describe("create config tests", () => {
+  console.log = jest.fn();
+  test("should create config file", async () => {
+    try {
+      fs.existsSync("rhc.config.json") && fs.unlinkSync("rhc.config.json");
+      createConfig();
+      await sleep(1000);
+      expect(fs.existsSync("rhc.config.json")).toBe(true);
+      fs.unlinkSync("rhc.config.json");
+    } catch (err) {
+      fail(err);
+    }
+  });
+
+  test("should not create already existed config file", async () => {
+    try {
+      fs.existsSync("rhc.config.json") && fs.unlinkSync("rhc.config.json");
+      createConfig();
+      await sleep(1000);
+      createConfig();
+      await sleep(1000);
+      expect(console.log).lastCalledWith("rhc.config.json already exist");
+      fs.unlinkSync("rhc.config.json");
+    } catch (err) {
+      fail(err);
+    }
+  });
+});
