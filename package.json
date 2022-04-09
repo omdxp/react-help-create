@@ -8,7 +8,8 @@
   },
   "scripts": {
     "rhc": "node .",
-    "rhc:help": "node . --help"
+    "rhc:help": "node . --help",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -29,5 +30,8 @@
   "dependencies": {
     "file-system": "^2.2.2",
     "yargs": "^17.1.1"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
   }
 }
