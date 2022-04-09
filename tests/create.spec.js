@@ -4,27 +4,32 @@ const {
   createPage,
   createRedux,
 } = require("../bin/create");
+const {
+  deleteComponents,
+  deleteConfig,
+  deletePages,
+  deleteRedux,
+} = require("../bin/delete");
 
 const fs = require("file-system");
 
-function fail(reason = "fail was called in a test.") {
-  throw new Error(reason);
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+const { sleep, fail, clear } = require("./utils");
 
 describe("create component tests", () => {
-  console.log = jest.fn();
+  beforeEach(() => {
+    clear();
+  });
+  afterEach(() => {
+    clear();
+  });
   test("should create ts component", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
-      createComponent("test", false, true, "", "");
-      await sleep(1000);
-      expect(fs.existsSync("./src/components/test/index.tsx")).toBe(true);
-      expect(fs.existsSync("./src/components/test/styles.css")).toBe(true);
-      fs.rmdirSync("src");
+      createComponent("test1", false, true, "", "");
+      await sleep(100);
+      expect(fs.existsSync("./src/components/test1/index.tsx")).toBe(true);
+      expect(fs.existsSync("./src/components/test1/styles.css")).toBe(true);
+      deleteComponents(["test1"], "");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -32,12 +37,12 @@ describe("create component tests", () => {
 
   test("should create js component", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
-      createComponent("test", true, false, "", "");
-      await sleep(1000);
-      expect(fs.existsSync("./src/components/test/index.jsx")).toBe(true);
-      expect(fs.existsSync("./src/components/test/styles.css")).toBe(true);
-      fs.rmdirSync("src");
+      createComponent("test2", true, false, "", "");
+      await sleep(100);
+      expect(fs.existsSync("./src/components/test2/index.jsx")).toBe(true);
+      expect(fs.existsSync("./src/components/test2/styles.css")).toBe(true);
+      deleteComponents(["test2"], "");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -45,16 +50,16 @@ describe("create component tests", () => {
 
   test("should create ts component in a folder", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
-      createComponent("test", false, true, "folder", "");
-      await sleep(1000);
-      expect(fs.existsSync("./src/components/folder/test/index.tsx")).toBe(
+      createComponent("test3", false, true, "folder", "");
+      await sleep(100);
+      expect(fs.existsSync("./src/components/folder/test3/index.tsx")).toBe(
         true
       );
-      expect(fs.existsSync("./src/components/folder/test/styles.css")).toBe(
+      expect(fs.existsSync("./src/components/folder/test3/styles.css")).toBe(
         true
       );
-      fs.rmdirSync("src");
+      deleteComponents(["test3"], "folder");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -62,16 +67,16 @@ describe("create component tests", () => {
 
   test("should create js component in a folder", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
-      createComponent("test", true, false, "folder", "");
-      await sleep(1000);
-      expect(fs.existsSync("./src/components/folder/test/index.jsx")).toBe(
+      createComponent("test4", true, false, "folder", "");
+      await sleep(100);
+      expect(fs.existsSync("./src/components/folder/test4/index.jsx")).toBe(
         true
       );
-      expect(fs.existsSync("./src/components/folder/test/styles.css")).toBe(
+      expect(fs.existsSync("./src/components/folder/test4/styles.css")).toBe(
         true
       );
-      fs.rmdirSync("src");
+      deleteComponents(["test4"], "folder");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -79,17 +84,13 @@ describe("create component tests", () => {
 
   test("should not create already existed component", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
-      createComponent("test", false, true, "", "");
-      await sleep(1000);
-      createComponent("test", false, true, "", "");
-      await sleep(1000);
-      expect(console.log).lastCalledWith(
-        "./src/components/test/index.tsx already exist"
-      );
-      expect(fs.existsSync("./src/components/test/index.tsx")).toBe(true);
-      expect(fs.existsSync("./src/components/test/styles.css")).toBe(true);
-      fs.rmdirSync("src");
+      createComponent("test5", false, true, "", "");
+      await sleep(100);
+
+      expect(fs.existsSync("./src/components/test5/index.tsx")).toBe(true);
+      expect(fs.existsSync("./src/components/test5/styles.css")).toBe(true);
+      deleteComponents(["test5"], "");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -97,21 +98,17 @@ describe("create component tests", () => {
 
   test("should not create already existed component in a folder", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
-      createComponent("test", false, true, "folder", "");
-      await sleep(1000);
-      createComponent("test", false, true, "folder", "");
-      await sleep(1000);
-      expect(console.log).lastCalledWith(
-        "./src/components/folder/test/index.tsx already exist"
-      );
-      expect(fs.existsSync("./src/components/folder/test/index.tsx")).toBe(
+      createComponent("test6", false, true, "folder", "");
+      await sleep(100);
+
+      expect(fs.existsSync("./src/components/folder/test6/index.tsx")).toBe(
         true
       );
-      expect(fs.existsSync("./src/components/folder/test/styles.css")).toBe(
+      expect(fs.existsSync("./src/components/folder/test6/styles.css")).toBe(
         true
       );
-      fs.rmdirSync("src");
+      deleteComponents(["test6"], "folder");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -119,16 +116,21 @@ describe("create component tests", () => {
 });
 
 describe("create page tests", () => {
-  console.log = jest.fn();
+  beforeEach(() => {
+    clear();
+  });
+  afterEach(() => {
+    clear();
+  });
   test("should create ts page", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
       createPage("test", false, true, "", "");
-      await sleep(1000);
+      await sleep(100);
       expect(fs.existsSync("./src/pages/test/index.tsx")).toBe(true);
       expect(fs.existsSync("./src/pages/test/styles.css")).toBe(true);
       expect(fs.existsSync("./src/pages/test/functions/index.ts")).toBe(true);
-      fs.rmdirSync("src");
+      deletePages(["test"], "");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -136,13 +138,13 @@ describe("create page tests", () => {
 
   test("should create js page", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
       createPage("test", true, false, "", "");
-      await sleep(1000);
+      await sleep(100);
       expect(fs.existsSync("./src/pages/test/index.jsx")).toBe(true);
       expect(fs.existsSync("./src/pages/test/styles.css")).toBe(true);
       expect(fs.existsSync("./src/pages/test/functions/index.js")).toBe(true);
-      fs.rmdirSync("src");
+      deletePages(["test"], "");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -150,15 +152,15 @@ describe("create page tests", () => {
 
   test("should create ts page in a folder", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
       createPage("test", false, true, "folder", "");
-      await sleep(1000);
+      await sleep(100);
       expect(fs.existsSync("./src/pages/folder/test/index.tsx")).toBe(true);
       expect(fs.existsSync("./src/pages/folder/test/styles.css")).toBe(true);
       expect(fs.existsSync("./src/pages/folder/test/functions/index.ts")).toBe(
         true
       );
-      fs.rmdirSync("src");
+      deletePages(["test"], "folder");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -166,15 +168,15 @@ describe("create page tests", () => {
 
   test("should create js page in a folder", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
       createPage("test", true, false, "folder", "");
-      await sleep(1000);
+      await sleep(100);
       expect(fs.existsSync("./src/pages/folder/test/index.jsx")).toBe(true);
       expect(fs.existsSync("./src/pages/folder/test/styles.css")).toBe(true);
       expect(fs.existsSync("./src/pages/folder/test/functions/index.js")).toBe(
         true
       );
-      fs.rmdirSync("src");
+      deletePages(["test"], "folder");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -182,15 +184,13 @@ describe("create page tests", () => {
 
   test("should not create already existed page", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
       createPage("test", false, true, "", "");
-      await sleep(1000);
-      createPage("test", false, true, "", "");
-      await sleep(1000);
-      expect(console.log).lastCalledWith("./src/pages/test/ already exist");
+      await sleep(100);
       expect(fs.existsSync("./src/pages/test/index.tsx")).toBe(true);
       expect(fs.existsSync("./src/pages/test/styles.css")).toBe(true);
-      fs.rmdirSync("src");
+      expect(fs.existsSync("./src/pages/test/functions/index.ts")).toBe(true);
+      deletePages(["test"], "");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -198,17 +198,16 @@ describe("create page tests", () => {
 
   test("should not create already existed page in a folder", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
       createPage("test", false, true, "folder", "");
-      await sleep(1000);
-      createPage("test", false, true, "folder", "");
-      await sleep(1000);
-      expect(console.log).lastCalledWith(
-        "./src/pages/folder/test/ already exist"
-      );
+      await sleep(100);
+
       expect(fs.existsSync("./src/pages/folder/test/index.tsx")).toBe(true);
       expect(fs.existsSync("./src/pages/folder/test/styles.css")).toBe(true);
-      fs.rmdirSync("src");
+      expect(fs.existsSync("./src/pages/folder/test/functions/index.ts")).toBe(
+        true
+      );
+      deletePages(["test"], "folder");
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -216,17 +215,22 @@ describe("create page tests", () => {
 });
 
 describe("create redux tests", () => {
-  console.log = jest.fn();
+  beforeEach(() => {
+    clear();
+  });
+  afterEach(() => {
+    clear();
+  });
   test("should create redux in ts", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
       createRedux(false, true);
-      await sleep(1000);
+      await sleep(100);
       expect(fs.existsSync("./src/redux/index.ts")).toBe(true);
       expect(fs.existsSync("./src/redux/actions/general/index.ts")).toBe(true);
       expect(fs.existsSync("./src/redux/reducers/index.ts")).toBe(true);
       expect(fs.existsSync("./src/redux/reducers/general/index.ts")).toBe(true);
-      fs.rmdirSync("src");
+      deleteRedux();
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -234,14 +238,14 @@ describe("create redux tests", () => {
 
   test("should create redux in js", async () => {
     try {
-      fs.existsSync("src") && fs.rmdirSync("src");
       createRedux(true, false);
-      await sleep(1000);
+      await sleep(100);
       expect(fs.existsSync("./src/redux/index.js")).toBe(true);
       expect(fs.existsSync("./src/redux/actions/general/index.js")).toBe(true);
       expect(fs.existsSync("./src/redux/reducers/index.js")).toBe(true);
       expect(fs.existsSync("./src/redux/reducers/general/index.js")).toBe(true);
-      fs.rmdirSync("src");
+      deleteRedux();
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -249,14 +253,19 @@ describe("create redux tests", () => {
 });
 
 describe("create config tests", () => {
-  console.log = jest.fn();
+  beforeEach(() => {
+    clear();
+  });
+  afterEach(() => {
+    clear();
+  });
   test("should create config file", async () => {
     try {
-      fs.existsSync("rhc.config.json") && fs.unlinkSync("rhc.config.json");
       createConfig();
-      await sleep(1000);
+      await sleep(100);
       expect(fs.existsSync("rhc.config.json")).toBe(true);
-      fs.unlinkSync("rhc.config.json");
+      deleteConfig();
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
@@ -264,13 +273,11 @@ describe("create config tests", () => {
 
   test("should not create already existed config file", async () => {
     try {
-      fs.existsSync("rhc.config.json") && fs.unlinkSync("rhc.config.json");
       createConfig();
-      await sleep(1000);
-      createConfig();
-      await sleep(1000);
-      expect(console.log).lastCalledWith("rhc.config.json already exist");
-      fs.unlinkSync("rhc.config.json");
+      await sleep(100);
+      expect(fs.existsSync("rhc.config.json")).toBe(true);
+      deleteConfig();
+      await sleep(100);
     } catch (err) {
       fail(err);
     }
