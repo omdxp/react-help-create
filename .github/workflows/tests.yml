@@ -1,0 +1,29 @@
+name: "🚩 tests"
+
+on:
+  push:
+    branches: [chore/testing]
+
+jobs:
+  tests:
+    name: 🚀 Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: ☄️ checkout
+        uses: actions/checkout@v2
+
+      - name: 🐱‍🏍 node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: 📦 install dependencies
+        run: npm install
+
+      - name: 🚩 tests
+        run: npm run test
