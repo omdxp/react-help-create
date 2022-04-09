@@ -55,7 +55,6 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
             file.replace(/__COMPONENT__/g, component),
             (err) => {
               if (err) {
-                console.log(err);
                 console.log(`Unable to create ${component} component`);
               } else {
                 console.log(`${path} created`);
@@ -79,7 +78,6 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
           componentTemplateTs(component, withCSS, defaultExports, withProps),
           (err) => {
             if (err) {
-              console.log(err);
               console.log(`Unable to create ${component} component`);
             } else {
               console.log(`${path} created`);
@@ -123,7 +121,6 @@ exports.createComponent = (componentName, js, ts, folder, template) => {
             file.replace(/__COMPONENT__/g, component),
             (err) => {
               if (err) {
-                console.log(err);
                 console.log(`Unable to create ${component} component`);
               } else {
                 console.log(`${path} created`);

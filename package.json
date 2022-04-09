@@ -9,7 +9,8 @@
   "scripts": {
     "rhc": "node .",
     "rhc:help": "node . --help",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "yargs": "^17.1.1"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.1",
     "jest": "^27.5.1"
   }
 }
