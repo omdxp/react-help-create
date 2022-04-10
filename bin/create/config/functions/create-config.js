@@ -14,7 +14,6 @@ exports.createConfig = () => {
   }
   fs.writeFile("./rhc.config.json", defaultConfigTemplate(), (err) => {
     if (err) {
-      console.log(err);
       console.log("Unable to create rhc.config.json");
     } else {
       console.log("rhc.config.json created");

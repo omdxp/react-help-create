@@ -8,7 +8,9 @@
   },
   "scripts": {
     "rhc": "node .",
-    "rhc:help": "node . --help"
+    "rhc:help": "node . --help",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch --runInBand"
   },
   "repository": {
     "type": "git",
@@ -29,5 +31,9 @@
   "dependencies": {
     "file-system": "^2.2.2",
     "yargs": "^17.1.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1"
   }
 }
