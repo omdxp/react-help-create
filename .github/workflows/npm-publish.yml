@@ -24,7 +24,7 @@ jobs:
           registery-url: https://registry.npmjs.org/
 
       - name: 📦 install dependencies
-        run: npm install
+        run: yarn
 
       - name: 🐱‍👤 create .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
@@ -50,7 +50,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
 
       - name: 📦 install dependencies
-        run: npm install
+        run: yarn
 
       - name: 🐱‍👤 create .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
