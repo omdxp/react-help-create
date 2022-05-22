@@ -7,6 +7,7 @@ const {
   createRedux,
   createConfig,
   createReducer,
+  createAction,
 } = require("./create");
 const {
   deleteComponents,
@@ -47,6 +48,11 @@ yargs
           type: "string",
           describe: "To create redux reducer implementation",
         })
+        .positional("--action", {
+          type: "string",
+          describe: "To create redux action implementation",
+        })
+        .array("--action")
         .positional("--config", {
           type: "boolean",
           describe: "to create config file",
@@ -80,6 +86,7 @@ yargs
           page,
           redux,
           reducer,
+          action,
           config,
           js,
           ts,
@@ -101,6 +108,8 @@ yargs
           createRedux(js, ts);
         } else if (reducer) {
           reducer.forEach((r) => createReducer(r, js, ts));
+        } else if (action) {
+          createAction(action, js, ts);
         } else if (config) {
           createConfig();
         } else {
