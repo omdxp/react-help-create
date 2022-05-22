@@ -14,6 +14,7 @@ const {
   deletePages,
   deleteRedux,
   deleteReducers,
+  deleteActions,
   deleteConfig,
 } = require("./delete");
 const { combineComponents, combinePages } = require("./combine");
@@ -148,6 +149,11 @@ yargs
           describe: "To delete redux reducer implementation",
         })
         .array("--reducer")
+        .positional("--action", {
+          type: "string",
+          describe: "To delete redux action implementation",
+        })
+        .array("--action")
         .positional("--config", {
           type: "boolean",
           describe: "to delete config file",
@@ -161,7 +167,8 @@ yargs
     },
     (argv) => {
       if (rootChecker()) {
-        const { component, page, redux, reducer, config, folder } = argv;
+        const { component, page, redux, reducer, action, config, folder } =
+          argv;
         try {
           loadConfig();
         } catch (e) {}
@@ -173,6 +180,8 @@ yargs
           deleteRedux();
         } else if (reducer) {
           deleteReducers(reducer, languageChecker() === "ts");
+        } else if (action) {
+          deleteActions(action, languageChecker() === "ts");
         } else if (config) {
           deleteConfig();
         } else {
