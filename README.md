@@ -2,6 +2,9 @@
   <img src="https://user-images.githubusercontent.com/48713070/130338182-bfd64ba3-bdd0-4384-8560-c0c0021a8d02.png" width="350" height="350" alt="react-help-create"/>
 </p>
 <h1 align="center">react-help-create</h1>
+
+<p align="center">Focus on your code, not your project structure!</p>
+
 <p align="center">This command line helps you create components, pages and even redux implementation for your react project.</p>
 
 <p align="center">
