@@ -19,7 +19,7 @@ exports.createAction = (actionName, js, ts) => {
     console.log("Usage: rnhc create --action <reducer-name> <action-name>");
     return;
   }
-  const { reduxRoot } = config;
+  const { reduxRoot, applyReduxThunk } = config;
   const reducer = actionName[0];
   const reducerPath = `${reduxRoot}/reducers/${reducer}`;
   if (!fs.existsSync(reducerPath)) {
@@ -45,7 +45,7 @@ exports.createAction = (actionName, js, ts) => {
     } else {
       fs.fs.writeFileSync(
         actionFilePath,
-        customActionTemplate(reducer, action),
+        customActionTemplate(reducer, action, applyReduxThunk),
         {
           encoding: "utf8",
           flag: "w",

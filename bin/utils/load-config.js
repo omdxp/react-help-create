@@ -19,6 +19,7 @@ exports.loadConfig = () => {
       componentsRoot,
       pagesRoot,
       reduxRoot,
+      applyReduxThunk,
     } = JSON.parse(fs.readFileSync("./rhc.config.json"));
     config.withCSS = typeof withCSS === "boolean" ? withCSS : true;
     config.withFunctions =
@@ -32,6 +33,8 @@ exports.loadConfig = () => {
       typeof pagesRoot === "string" ? pagesRoot : "./src/pages";
     config.reduxRoot =
       typeof reduxRoot === "string" ? reduxRoot : "./src/redux";
+    config.applyReduxThunk =
+      typeof applyReduxThunk === "boolean" ? applyReduxThunk : true;
   } catch (e) {
     throw new Error(
       "The configuration file could not be loaded. Please make sure that the file exists and is valid."
