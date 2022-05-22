@@ -6,6 +6,7 @@ let config = {
   componentsRoot: "./src/components", // path to components folder
   pagesRoot: "./src/pages", // path to pages folder
   reduxRoot: "./src/redux", // path to redux folder
+  applyReduxThunk: true, // if true, apply redux thunk middleware to store
 };
 
 exports.config = config;

@@ -6,11 +6,15 @@ const {
   createPage,
   createRedux,
   createConfig,
+  createReducer,
+  createAction,
 } = require("./create");
 const {
   deleteComponents,
   deletePages,
   deleteRedux,
+  deleteReducers,
+  deleteActions,
   deleteConfig,
 } = require("./delete");
 const { combineComponents, combinePages } = require("./combine");
@@ -41,6 +45,16 @@ yargs
           type: "boolean",
           describe: "to create redux implementation",
         })
+        .array("--reducer")
+        .positional("--reducer", {
+          type: "string",
+          describe: "To create redux reducer implementation",
+        })
+        .positional("--action", {
+          type: "string",
+          describe: "To create redux action implementation",
+        })
+        .array("--action")
         .positional("--config", {
           type: "boolean",
           describe: "to create config file",
@@ -69,7 +83,18 @@ yargs
     },
     (argv) => {
       if (rootChecker()) {
-        let { component, page, redux, config, js, ts, folder, template } = argv;
+        let {
+          component,
+          page,
+          redux,
+          reducer,
+          action,
+          config,
+          js,
+          ts,
+          folder,
+          template,
+        } = argv;
         try {
           loadConfig();
         } catch (e) {}
@@ -83,6 +108,10 @@ yargs
           page.forEach((p) => createPage(p, js, ts, folder, template));
         } else if (redux) {
           createRedux(js, ts);
+        } else if (reducer) {
+          reducer.forEach((r) => createReducer(r, js, ts));
+        } else if (action) {
+          createAction(action, js, ts);
         } else if (config) {
           createConfig();
         } else {
@@ -115,6 +144,16 @@ yargs
           type: "boolean",
           describe: "to delete redux implementation",
         })
+        .positional("--reducer", {
+          type: "string",
+          describe: "To delete redux reducer implementation",
+        })
+        .array("--reducer")
+        .positional("--action", {
+          type: "string",
+          describe: "To delete redux action implementation",
+        })
+        .array("--action")
         .positional("--config", {
           type: "boolean",
           describe: "to delete config file",
@@ -128,7 +167,8 @@ yargs
     },
     (argv) => {
       if (rootChecker()) {
-        const { component, page, redux, config, folder } = argv;
+        const { component, page, redux, reducer, action, config, folder } =
+          argv;
         try {
           loadConfig();
         } catch (e) {}
@@ -138,6 +178,10 @@ yargs
           deletePages(page, folder);
         } else if (redux) {
           deleteRedux();
+        } else if (reducer) {
+          deleteReducers(reducer, languageChecker() === "ts");
+        } else if (action) {
+          deleteActions(action, languageChecker() === "ts");
         } else if (config) {
           deleteConfig();
         } else {

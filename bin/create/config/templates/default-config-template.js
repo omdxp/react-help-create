@@ -12,6 +12,7 @@ exports.defaultConfigTemplate = () => {
   "defaultExports": true,
   "componentsRoot": "./src/components",
   "pagesRoot": "./src/pages",
-  "reduxRoot": "./src/redux"
+  "reduxRoot": "./src/redux",
+  "applyReduxThunk": true
 }`;
 };

@@ -3,12 +3,16 @@ const {
   createConfig,
   createPage,
   createRedux,
+  createReducer,
+  createAction,
 } = require("../bin/create");
 const {
   deleteComponents,
   deleteConfig,
   deletePages,
   deleteRedux,
+  deleteReducers,
+  deleteActions,
 } = require("../bin/delete");
 
 const fs = require("file-system");
@@ -277,6 +281,112 @@ describe("create config tests", () => {
       await sleep(100);
       expect(fs.existsSync("rhc.config.json")).toBe(true);
       deleteConfig();
+      await sleep(100);
+    } catch (err) {
+      fail(err);
+    }
+  });
+});
+
+describe("create action tests", () => {
+  beforeEach(() => {
+    clear();
+  });
+  afterEach(() => {
+    clear();
+  });
+  test("should not create action if redux implementation does not exist", async () => {
+    try {
+      createAction(["test", "test-action"], false, true);
+      await sleep(100);
+      expect(fs.existsSync("./src/redux/actions/test/test-action.ts")).toBe(
+        false
+      );
+    } catch (err) {
+      fail(err);
+    }
+  });
+
+  test("should not create action if reducer does not exist", async () => {
+    try {
+      createRedux(false, true);
+      await sleep(100);
+      createAction(["test", "test-action"], false, true);
+      await sleep(100);
+      expect(fs.existsSync("./src/redux/actions/test/test-action.ts")).toBe(
+        false
+      );
+      deleteRedux();
+      await sleep(100);
+    } catch (err) {
+      fail(err);
+    }
+  });
+
+  test("should creact action for existed reducer", async () => {
+    try {
+      createRedux(false, true);
+      await sleep(100);
+      createReducer("test", false, true);
+      createAction(["test", "test-action"], false, true);
+      await sleep(100);
+      expect(fs.existsSync("./src/redux/actions/test/test-action.ts")).toBe(
+        true
+      );
+      deleteRedux();
+      await sleep(100);
+    } catch (err) {
+      fail(err);
+    }
+  });
+
+  test("should create multiple actions for existed reducer", async () => {
+    try {
+      createRedux(false, true);
+      await sleep(100);
+      createReducer("test", false, true);
+      createAction(["test", "test-action", "test-action-2"], false, true);
+      await sleep(100);
+      expect(fs.existsSync("./src/redux/actions/test/test-action.ts")).toBe(
+        true
+      );
+      expect(fs.existsSync("./src/redux/actions/test/test-action-2.ts")).toBe(
+        true
+      );
+      deleteRedux();
+      await sleep(100);
+    } catch (err) {
+      fail(err);
+    }
+  });
+});
+
+describe("create reducer tests", () => {
+  beforeEach(() => {
+    clear();
+  });
+  afterEach(() => {
+    clear();
+  });
+
+  test("should not create reducer if redux implementation does not exist", async () => {
+    try {
+      createReducer("test", false, true);
+      await sleep(100);
+      expect(fs.existsSync("./src/redux/reducers/test/index.ts")).toBe(false);
+    } catch (err) {
+      fail(err);
+    }
+  });
+
+  test("should create reducer for existed redux implementation", async () => {
+    try {
+      createRedux(false, true);
+      await sleep(100);
+      createReducer("test", false, true);
+      await sleep(100);
+      expect(fs.existsSync("./src/redux/reducers/test/index.ts")).toBe(true);
+      deleteRedux();
       await sleep(100);
     } catch (err) {
       fail(err);
