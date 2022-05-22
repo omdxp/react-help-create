@@ -8,15 +8,17 @@ exports.customReducerTemplateTs = (reducerName) => {
   const interfaceStateName =
     reducerName.charAt(0).toUpperCase() + reducerName.slice(1);
   return `import { Action } from "../..";
- export interface ${interfaceStateName}State { }
- export const ${reducerName} = (
-   state: ${interfaceStateName}State = { },
-   action: Action<${interfaceStateName}State>,
- ) => {
-   switch (action.type) {
-     default:
-       return state;
-   }
- };
- `;
+
+export interface ${interfaceStateName}State { }
+
+export const ${reducerName} = (
+  state: ${interfaceStateName}State = { },
+  action: Action<${interfaceStateName}State>,
+) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+`;
 };

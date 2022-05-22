@@ -7,7 +7,7 @@ const {
 /**
  * @function createAction
  * @description this function is used to create action file.
- * @param {Array} actions - array of actions starting with the name of the reducer.
+ * @param {Array<String>} actions - array of actions starting with the name of the reducer.
  * @param {boolean} js - write file in javascript.
  * @param {boolean} ts - write file in typescript.
  * @param {boolean} overwrite - overwrite existed files.
@@ -20,6 +20,10 @@ exports.createAction = (actionName, js, ts) => {
     return;
   }
   const { reduxRoot, applyReduxThunk } = config;
+  if (!fs.existsSync(reduxRoot)) {
+    console.log(`${reduxRoot} does not exist`);
+    return;
+  }
   const reducer = actionName[0];
   const reducerPath = `${reduxRoot}/reducers/${reducer}`;
   if (!fs.existsSync(reducerPath)) {

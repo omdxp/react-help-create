@@ -14,21 +14,21 @@ exports.customActionTemplateJs = (reducer, action, applyReduxThunk) => {
     str += `export const ${getCamelCase(
       action
     )}Action = () => async (dispatch, getState) => {
-   dispatch({ type: "${reducer.replace(/-/g, "_").toUpperCase()}_${action
+  dispatch({ type: "${reducer.replace(/-/g, "_").toUpperCase()}_${action
       .replace(/-/g, "_")
       .toUpperCase()}", payload: { } })
- }
- `;
+}
+`;
   } else {
     str += `export const ${getCamelCase(action)}Action = () => {
-   return {
-     type: "${reducer.replace(/-/g, "_").toUpperCase()}_${action
+  return {
+    type: "${reducer.replace(/-/g, "_").toUpperCase()}_${action
       .replace(/-/g, "_")
       .toUpperCase()}",
-     payload: { }
-   };
- }
- `;
+    payload: { }
+  };
+}
+`;
   }
   return str;
 };

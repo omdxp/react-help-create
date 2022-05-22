@@ -14,33 +14,33 @@ exports.customActionTemplateTs = (reducer, action, applyReduxThunk) => {
   const reducerStateName =
     reducerName.charAt(0).toUpperCase() + reducerName.slice(1);
   let str = `import { ${reducerStateName}State } from "../../reducers/${reducer}";
- `;
+`;
   if (applyReduxThunk) {
     str += `import { ThunkResult } from "../..";
- `;
+`;
   } else {
     str += `import { Action } from "../..";
- `;
+`;
   }
   if (applyReduxThunk) {
     str += `
- export const ${actionName}Action = (): ThunkResult<${reducerStateName}State> => async (dispatch, getState) => {
-   dispatch({ type: "${reducer.replace(/-/g, "_").toUpperCase()}_${action
+export const ${actionName}Action = (): ThunkResult<${reducerStateName}State> => async (dispatch, getState) => {
+  dispatch({ type: "${reducer.replace(/-/g, "_").toUpperCase()}_${action
       .replace(/-/g, "_")
       .toUpperCase()}", payload: { } })
- }
- `;
+}
+`;
   } else {
     str += `
- export const ${actionName}Action = (): Action<${reducerStateName}State> => {
-   return {
-     type: "${reducer.replace(/-/g, "_").toUpperCase()}_${action
+export const ${actionName}Action = (): Action<${reducerStateName}State> => {
+  return {
+    type: "${reducer.replace(/-/g, "_").toUpperCase()}_${action
       .replace(/-/g, "_")
       .toUpperCase()}",
-     payload: { }
-   };
- }
- `;
+    payload: { }
+  };
+}
+`;
   }
   return str;
 };
