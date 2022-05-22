@@ -6,6 +6,7 @@ const {
   createPage,
   createRedux,
   createConfig,
+  createReducer,
 } = require("./create");
 const {
   deleteComponents,
@@ -41,6 +42,11 @@ yargs
           type: "boolean",
           describe: "to create redux implementation",
         })
+        .array("--reducer")
+        .positional("--reducer", {
+          type: "string",
+          describe: "To create redux reducer implementation",
+        })
         .positional("--config", {
           type: "boolean",
           describe: "to create config file",
@@ -69,7 +75,17 @@ yargs
     },
     (argv) => {
       if (rootChecker()) {
-        let { component, page, redux, config, js, ts, folder, template } = argv;
+        let {
+          component,
+          page,
+          redux,
+          reducer,
+          config,
+          js,
+          ts,
+          folder,
+          template,
+        } = argv;
         try {
           loadConfig();
         } catch (e) {}
@@ -83,6 +99,8 @@ yargs
           page.forEach((p) => createPage(p, js, ts, folder, template));
         } else if (redux) {
           createRedux(js, ts);
+        } else if (reducer) {
+          reducer.forEach((r) => createReducer(r, js, ts));
         } else if (config) {
           createConfig();
         } else {
