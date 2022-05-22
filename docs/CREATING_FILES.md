@@ -640,7 +640,8 @@ rhc create --config
   "defaultExports": true,
   "componentsRoot": "./src/components",
   "pagesRoot": "./src/pages",
-  "reduxRoot": "./src/redux"
+  "reduxRoot": "./src/redux",
+  "applyReduxThunk": true
 }
 ```
 
@@ -651,5 +652,6 @@ rhc create --config
 5. `componentsRoot`: the root folder for components, default is `./src/components`.
 6. `pagesRoot`: the root folder for pages, default is `./src/pages`.
 7. `reduxRoot`: the root folder for redux, default is `./src/redux`.
+8. `applyReduxThunk`: if true, apply `redux-thunk` middleware to the store, if false, don't apply `redux-thunk` middleware, default is true.
 
 - If no configuration file is found or you don't specify some of the configuration, the default configuration will be used.
