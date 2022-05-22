@@ -16,7 +16,7 @@ const {
 exports.createAction = (actionName, js, ts) => {
   if (actionName.length <= 1) {
     console.log("At least provide one action for a reducer");
-    console.log("Usage: rnhc create --action <reducer-name> <action-name>");
+    console.log("Usage: rhc create --action <reducer-name> <action-name>");
     return;
   }
   const { reduxRoot, applyReduxThunk } = config;
