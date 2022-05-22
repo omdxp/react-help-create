@@ -464,6 +464,168 @@ export const mainReducer = combineReducers({
 });
 ```
 
+- ### Reducers
+
+1 - To create a reducer, you must have a redux implementation then run:
+
+```sh
+rhc create --reducer <reducer-name>
+```
+
+### Example
+
+```sh
+rhc create --reducer auth
+```
+
+- This will create a `auth` reducer under the `src/redux/reducers/` folder and the `index.js` for this reducer will contain the same code written in the template.
+
+`src/redux/reducers/auth/index.js`
+
+```js
+const initialState = {};
+
+export const auth = (state = initialState, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+```
+
+- It will also add the reducer to the `index.js` file under the `reducers` folder to use it in the `combineReducers` function.
+
+`src/redux/reducers/index.js`
+
+```js
+import { combineReducers } from "redux";
+import { auth } from "./auth";
+import { general } from "./general";
+
+export const mainReducer = combineReducers({
+  auth,
+  general,
+});
+```
+
+- If you don't have a redux implementation create using `rhc create -r`, this command will prompt:
+
+```sh
+Redux implementation does not exist
+```
+
+- You can also overwrite the reducer by running:
+
+```sh
+rhc create --reducer <reducer-name> -o
+```
+
+2 - To create multiple reducers, you must have a redux implementation then run:
+
+```sh
+rhc create --reducer <reducer-name-1> <reducer-name-2> ...
+```
+
+- This will also update your `index.js` file under the `reducers` folder to use the reducers you created.
+
+- ### Actions
+
+- To create an action, you must have a redux implementation as wee as the reducer you want to add an action for it, then run:
+
+```sh
+rhc create --action <reducer-name> <action-name>
+```
+
+### Example
+
+- In this example we are going to create an action for the `auth` reducer, so we will run:
+
+```sh
+rhc create --action auth login
+```
+
+- This will create a `login` action under the `src/redux/actions/auth/` folder and the `login.js` for this action will contain the same code written in the template.
+
+`src/redux/actions/auth/login.js`
+
+```js
+export const loginAction = () => async (dispatch, getState) => {
+  dispatch({ type: "AUTH_LOGIN", payload: {} });
+};
+```
+
+- And it will update the `index.js` file under `src/redux/actions/auth/` to export the action.
+
+`src/redux/actions/auth/index.js`
+
+```js
+export { loginAction } from "./login";
+```
+
+2 - To create multiple actions, you must have a redux implementation and existed reducer, then run:
+
+```sh
+rhc create --action <reducer-name> <action-name-1> <action-name-2> ...
+```
+
+- If the reducer doesn't exist, you will get an error like this:
+
+```sh
+./src/redux/reducers/x does not exist
+```
+
+- Keep in mind that this also works for TypeScript projects. Even better when creating an action for a reducer in TypeScript, you will get TypeScript support as well as updating the `ActionType` in the `src/redux/index.ts` file. For example if you create an action for the `auth` reducer, you will get the following:
+
+`src/redux/index.ts`
+
+```ts
+import { applyMiddleware, compose, createStore } from "redux";
+import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
+
+import { mainReducer } from "./reducers";
+
+/**
+ * the main redux state, with all the reducers
+ */
+export const mainStore = createStore(
+  mainReducer,
+  compose(applyMiddleware(thunk))
+);
+
+/**
+ * Creates a new redux state each time this function is called, this is used only for unit tests, to ensure that we have fresh state on each individual test
+ */
+export const createMainStore = () => {
+  return createStore(mainReducer, compose(applyMiddleware(thunk)));
+};
+
+export type StateInterface = ReturnType<typeof mainStore.getState>;
+
+/**
+ * list of action types
+ */
+export type ActionType = "AUTH_LOGIN" | "UPDATE_GENERAL";
+
+export interface Action<T> {
+  type: ActionType;
+  payload: Partial<T>;
+}
+export type ThunkResult<
+  A = Record<string, unknown>,
+  E = Record<string, unknown>
+> = ThunkAction<void, StateInterface, E, Action<A>>;
+
+export type Dispatch<A> = ThunkDispatch<
+  StateInterface,
+  Record<string, unknown>,
+  Action<A>
+>;
+```
+
+- It will also update the necessary files that imports and exports modules in order to use the action in the reducer.
+
+- Also another note, if you prefer not using `redux-thunk` you can set that in `rhc.config.json` file, this will let you create your store and actions without applying the `redux-thunk` middleware (For more details check [configuration section](#configuration)).
+
 ## Configuration
 
 With the above steps, you can now create a configuration file which will be used by `rhc` to create your files with your custom config.
@@ -484,7 +646,8 @@ rhc create --config
   "defaultExports": true,
   "componentsRoot": "./src/components",
   "pagesRoot": "./src/pages",
-  "reduxRoot": "./src/redux"
+  "reduxRoot": "./src/redux",
+  "applyReduxThunk": true
 }
 ```
 
@@ -495,5 +658,6 @@ rhc create --config
 5. `componentsRoot`: the root folder for components, default is `./src/components`.
 6. `pagesRoot`: the root folder for pages, default is `./src/pages`.
 7. `reduxRoot`: the root folder for redux, default is `./src/redux`.
+8. `applyReduxThunk`: if true, apply `redux-thunk` middleware to the store, if false, don't apply `redux-thunk` middleware, default is true.
 
 - If no configuration file is found or you don't specify some of the configuration, the default configuration will be used.
